@@ -46,9 +46,7 @@ body {
         }
     }
     
-    &__close{
-        display: block;
-    }
+
 
     &__links {
         display: flex;
@@ -138,7 +136,7 @@ body {
             background-color: rgb(0, 255, 64);
             position: fixed;
             inset: 0;
-            padding: 1.5rem;
+            padding: 50px;
             translate: 100vw 0;
             transition: translate 0.5s ease-in-out;
         }
