@@ -4,14 +4,60 @@ $hover-color: #555; /* Change to your desired hover color */
 body, html {
     height: 100%;
     margin: 0;
+    display: flex;
 }
 
 body {
+    font-family: "DM Sans", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
     display: flex;
-    background-color: #f0f0f0; /* Adjust the background color as needed */
+    justify-content: flex-start;
+    align-items: center;
+    height: 100vh;
+    padding-left: 500px; 
+    
+    @media (max-width: 768px) {
+      justify-content: center; /* Center the content on mobile */
+      padding-left: 0;
+      padding-right: 0; /* Ensure no padding cuts off content */
+    }
 }
 
+.about {
+    background-color: white;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
 
+  
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+    }
+}
+
+.project {
+    background-color: white;
+    padding: 50px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+
+  
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: left;
+    }
+}
 .topnav {
     position: fixed;
     top: 0;
@@ -23,7 +69,7 @@ body {
     box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: left;
     padding: 0px; /* Adjust padding as needed */
     overflow-y: auto; /* Makes the sidebar scrollable if it gets too tall */
     font-family: "DM Sans", sans-serif;
@@ -55,10 +101,11 @@ body {
         padding: 0;
         margin-bottom: 20px;
         flex-direction: column;
-        text-align: center;
+        text-align: left;
         font-family: "DM Sans", sans-serif;
         font-weight: 500; /* Adjust the weight as needed for the heading */
         font-size: 1em; /* Adjust the size as needed for the heading */
+        padding-left: 50px;
     }
 
     &__link {
@@ -137,7 +184,7 @@ body {
             position: fixed;
             inset: 0;
             padding: 50px;
-            translate: 100vw 0;
+            translate: 150vw 0;
             transition: translate 0.5s ease-in-out;
         }
     
