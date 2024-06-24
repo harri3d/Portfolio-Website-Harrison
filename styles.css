@@ -1,119 +1,139 @@
-/* Reset CSS */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: Arial, sans-serif;
 }
 
-/* Global Styles */
 body {
-  font-family: Arial, sans-serif;
-  line-height: 1.6;
-  background-color: #333; /* Dark background color */
-  color: #fff;
-}
-
-.container {
-  width: 90%;
-  margin: auto;
-  overflow: hidden;
+    display: flex;
+    background-color: #f0f0f0; /* Adjust the background color as needed */
 }
 
 header {
-  background: rgba(17, 17, 17, 0.8); /* Dark header background color */
-  padding: 20px 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 500px; /* Adjust the width of the sidebar as needed */
+    height: 100%;
+    background-color: white; /* Adjust the background color as needed */
+    z-index: 1000; /* Ensures the header stays on top */
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px; /* Adjust padding as needed */
+    overflow-y: auto; /* Makes the sidebar scrollable if it gets too tall */
 }
 
-header h1 {
-  font-family: 'Arial Black', sans-serif; /* Distinctive font */
-  font-size: 36px;
+.header-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
-.contact-button {
-  padding: 10px 20px;
-  background-color: #FF5733; /* Adjust button color as needed */
-  color: #fff;
-  text-decoration: none;
-  border-radius: 5px;
-  transition: background-color 1s ease;
+.logo {
+    width: 50px; /* Adjust the size of the logo as needed */
+    height: auto;
+    margin-bottom: 20px;
+    
 }
 
-.contact-button:hover {
-  background-color: #FF8C66; /* Adjust hover color as needed */
+.dm-sans-heading {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 700; /* Adjust the weight as needed for the heading */
+    font-size: 3em; /* Adjust the size as needed for the heading */
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-section {
-  padding: 50px 0;
+.dm-sans-light {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200; /* Adjust the weight as needed for the heading */
+    font-size: 4em; /* Adjust the size as needed for the heading */
+    margin-bottom: 20px;
+    text-align: center;
 }
 
-.reel-video {
-  position: relative;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
-  height: 0;
-  overflow: hidden;
+nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
 }
 
-.reel-video iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+nav ul li {
+    margin-bottom: 10px;
+    width: 100%;
+    text-align: center;
 }
 
-#video-background {
-  position: relative;
-  height: 90vh;
-  overflow: hidden;
+nav ul li a {
+    text-decoration: none;
+    color: #333; /* Adjust the link color as needed */
+    font-weight: bold;
+    display: block;
+    padding: 10px 0;
+    width: 100%;
 }
 
-#video-background video {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+nav ul li a:hover {
+    color: #007BFF; /* Adjust the hover color as needed */
+    background-color: #f0f0f0; /* Optional: Add background color on hover */
 }
 
-#video-background .container {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
+.content {
+    margin-left: 250px; /* Adjust this value to match the width of the sidebar */
+    padding: 20px;
+    flex: 1; /* Allows the content to take up the remaining space */
 }
 
-#gallery {
-  padding: 50px 0;
-}
+/* Media Query for Small Screens */
+@media (max-width: 768px) {
+    header {
+        width: 100%;
+        height: auto;
+        position: top;
+        top: 0px;
+        flex-direction: row;
+        justify-content: space-between;
+        padding: 10px;
+        box-shadow: none;
+    }
 
-#gallery h2 {
-  text-align: center;
-  margin-bottom: 30px;
-}
+    .header-content {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+        margin-top: 0; /* Remove the margin-top on small screens */
+    }
 
-.gallery-images {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(700px, 1fr));
-  gap: 50px;
-}
+    .logo {
+        width: 50px; /* Adjust the size of the logo for small screens */
+        margin-bottom: 0;
+        margin-right: 50px;
+    }
 
-.gallery-images img {
-  width: 100%;
-  border-radius: 5px;
-  transition: transform 0.1s ease;
-}
+    .dm-sans-heading {
+        font-size: 1.5em; /* Adjust the size for small screens */
+        margin-bottom: 0;
+    }
 
-.gallery-images img:hover {
-  transform: scale(1.01);
-}
+    nav ul {
+        display: flex;
+        justify-content: flex-end;
+    }
 
-footer {
-  text-align: center;
-  background: rgba(0, 0, 0, 0.8); /* Dark footer background color */
-  padding: 20px 0;
+    nav ul li {
+        margin-bottom: 0;
+        margin-left: 10px;
+    }
+
+    .content {
+        margin-left: 0;
+        padding-top: 60px; /* Space for the header */
+    }
 }
