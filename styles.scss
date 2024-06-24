@@ -1,0 +1,169 @@
+$primary-color: #333;
+$hover-color: #555; /* Change to your desired hover color */
+
+body, html {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    background-color: #f0f0f0; /* Adjust the background color as needed */
+}
+
+
+.topnav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 400px; /* Adjust the width of the sidebar as needed */
+    height: 100%;
+    background-color: white; /* Adjust the background color as needed */
+    z-index: 1000; /* Ensures the header stays on top */
+    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0px; /* Adjust padding as needed */
+    overflow-y: auto; /* Makes the sidebar scrollable if it gets too tall */
+    font-family: "DM Sans", sans-serif;
+
+    button{
+        position: fixed;
+        right:3em;
+        background: none;
+        border: none;
+        padding:0;
+        margin-inline-start:auto;
+        @media (width >= 70em){
+            display:none;
+        }
+    }
+
+    &__open[aria-expanded='true']{
+        + .topnav__menu {
+            translate: 0;
+        }
+    }
+    
+    &__close{
+        display: block;
+    }
+
+    &__links {
+        display: flex;
+        gap: 1rem;
+        margin: 0;
+        padding: 0;
+        margin-bottom: 20px;
+        flex-direction: column;
+        text-align: center;
+        font-family: "DM Sans", sans-serif;
+        font-weight: 500; /* Adjust the weight as needed for the heading */
+        font-size: 1em; /* Adjust the size as needed for the heading */
+    }
+
+    &__link {
+        text-decoration: none; /* Remove underline */
+        color: $primary-color; /* Use primary color for text */
+        transition: color 0.3s; /* Smooth transition for hover effect */
+    }
+
+    &__item{
+        list-style-type: none;
+        font-family: "DM Sans", sans-serif;
+        font-optical-sizing: auto;
+
+    }
+
+}
+
+.logo {
+    display: flex;
+    width: 50px; /* Adjust the size of the logo as needed */
+    height: auto;
+    margin-bottom: 20px;
+    align-items: left;
+    flex-direction: column;
+    
+}
+
+.dm-sans-heading {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600; /* Adjust the weight as needed for the heading */
+    font-size: 3.5em; /* Adjust the size as needed for the heading */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.dm-sans-light {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200; /* Adjust the weight as needed for the heading */
+    font-size: 4em; /* Adjust the size as needed for the heading */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.dm-sans-body {
+    font-family: "DM Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200; /* Adjust the weight as needed for the heading */
+    font-size: 1.5em; /* Adjust the size as needed for the heading */
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+
+.content {
+    margin-left: 250px; /* Adjust this value to match the width of the sidebar */
+    padding: 20px;
+    flex: 1; /* Allows the content to take up the remaining space */
+}
+
+
+
+/* Media Query for Small Screens */
+@media (max-width: 70em) {
+    .topnav {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        justify-content:space-between;
+        align-items: center; /* Center align items vertically */
+        padding: 20px;
+    
+        &__menu {
+            background-color: rgb(0, 255, 64);
+            position: fixed;
+            inset: 0;
+            padding: 1.5rem;
+            translate: 100vw 0;
+            transition: translate 0.5s ease-in-out;
+        }
+    
+        &__links {
+            flex-direction: column;
+        }
+    }
+    
+
+
+    .logo {
+        width: 40px; /* Adjust the size of the logo for small screens */
+        margin-bottom: 50;
+
+    }
+
+    .dm-sans-heading {
+        font-size: 2em; /* Adjust the size for small screens */
+        margin-bottom: 0;
+    }
+
+
+    .content {
+        margin-left: 0;
+        padding-top: 30px; /* Space for the header */
+    }
+}

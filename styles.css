@@ -1,139 +1,145 @@
+/* Change to your desired hover color */
 body, html {
-    height: 100%;
-    margin: 0;
-    font-family: Arial, sans-serif;
+  height: 100%;
+  margin: 0;
 }
 
 body {
-    display: flex;
-    background-color: #f0f0f0; /* Adjust the background color as needed */
+  display: flex;
+  background-color: #f0f0f0; /* Adjust the background color as needed */
 }
 
-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 500px; /* Adjust the width of the sidebar as needed */
-    height: 100%;
-    background-color: white; /* Adjust the background color as needed */
-    z-index: 1000; /* Ensures the header stays on top */
-    box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px; /* Adjust padding as needed */
-    overflow-y: auto; /* Makes the sidebar scrollable if it gets too tall */
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 400px; /* Adjust the width of the sidebar as needed */
+  height: 100%;
+  background-color: white; /* Adjust the background color as needed */
+  z-index: 1000; /* Ensures the header stays on top */
+  box-shadow: 2px 0 4px rgba(0, 0, 0, 0.1); /* Adds a subtle shadow for better visibility */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0px; /* Adjust padding as needed */
+  overflow-y: auto; /* Makes the sidebar scrollable if it gets too tall */
+  font-family: "DM Sans", sans-serif;
 }
-
-.header-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
+.topnav button {
+  position: fixed;
+  right: 3em;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-inline-start: auto;
+}
+@media (width >= 70em) {
+  .topnav button {
+    display: none;
+  }
+}
+.topnav__open[aria-expanded=true] + .topnav__menu {
+  translate: 0;
+}
+.topnav__close {
+  display: block;
+}
+.topnav__links {
+  display: flex;
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  margin-bottom: 20px;
+  flex-direction: column;
+  text-align: center;
+  font-family: "DM Sans", sans-serif;
+  font-weight: 500; /* Adjust the weight as needed for the heading */
+  font-size: 1em; /* Adjust the size as needed for the heading */
+}
+.topnav__link {
+  text-decoration: none; /* Remove underline */
+  color: #333; /* Use primary color for text */
+  transition: color 0.3s; /* Smooth transition for hover effect */
+}
+.topnav__item {
+  list-style-type: none;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
 }
 
 .logo {
-    width: 50px; /* Adjust the size of the logo as needed */
-    height: auto;
-    margin-bottom: 20px;
-    
+  display: flex;
+  width: 50px; /* Adjust the size of the logo as needed */
+  height: auto;
+  margin-bottom: 20px;
+  align-items: left;
+  flex-direction: column;
 }
 
 .dm-sans-heading {
-    font-family: "DM Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 700; /* Adjust the weight as needed for the heading */
-    font-size: 3em; /* Adjust the size as needed for the heading */
-    margin-bottom: 20px;
-    text-align: center;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600; /* Adjust the weight as needed for the heading */
+  font-size: 3.5em; /* Adjust the size as needed for the heading */
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .dm-sans-light {
-    font-family: "DM Sans", sans-serif;
-    font-optical-sizing: auto;
-    font-weight: 200; /* Adjust the weight as needed for the heading */
-    font-size: 4em; /* Adjust the size as needed for the heading */
-    margin-bottom: 20px;
-    text-align: center;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200; /* Adjust the weight as needed for the heading */
+  font-size: 4em; /* Adjust the size as needed for the heading */
+  margin-bottom: 20px;
+  text-align: center;
 }
 
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-}
-
-nav ul li {
-    margin-bottom: 10px;
-    width: 100%;
-    text-align: center;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #333; /* Adjust the link color as needed */
-    font-weight: bold;
-    display: block;
-    padding: 10px 0;
-    width: 100%;
-}
-
-nav ul li a:hover {
-    color: #007BFF; /* Adjust the hover color as needed */
-    background-color: #f0f0f0; /* Optional: Add background color on hover */
+.dm-sans-body {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 200; /* Adjust the weight as needed for the heading */
+  font-size: 1.5em; /* Adjust the size as needed for the heading */
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .content {
-    margin-left: 250px; /* Adjust this value to match the width of the sidebar */
-    padding: 20px;
-    flex: 1; /* Allows the content to take up the remaining space */
+  margin-left: 250px; /* Adjust this value to match the width of the sidebar */
+  padding: 20px;
+  flex: 1; /* Allows the content to take up the remaining space */
 }
 
 /* Media Query for Small Screens */
-@media (max-width: 768px) {
-    header {
-        width: 100%;
-        height: auto;
-        position: top;
-        top: 0px;
-        flex-direction: row;
-        justify-content: space-between;
-        padding: 10px;
-        box-shadow: none;
-    }
-
-    .header-content {
-        flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-        width: 100%;
-        margin-top: 0; /* Remove the margin-top on small screens */
-    }
-
-    .logo {
-        width: 50px; /* Adjust the size of the logo for small screens */
-        margin-bottom: 0;
-        margin-right: 50px;
-    }
-
-    .dm-sans-heading {
-        font-size: 1.5em; /* Adjust the size for small screens */
-        margin-bottom: 0;
-    }
-
-    nav ul {
-        display: flex;
-        justify-content: flex-end;
-    }
-
-    nav ul li {
-        margin-bottom: 0;
-        margin-left: 10px;
-    }
-
-    .content {
-        margin-left: 0;
-        padding-top: 60px; /* Space for the header */
-    }
-}
+@media (max-width: 70em) {
+  .topnav {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center; /* Center align items vertically */
+    padding: 20px;
+  }
+  .topnav__menu {
+    background-color: rgb(0, 255, 64);
+    position: fixed;
+    inset: 0;
+    padding: 1.5rem;
+    translate: 100vw 0;
+    transition: translate 0.5s ease-in-out;
+  }
+  .topnav__links {
+    flex-direction: column;
+  }
+  .logo {
+    width: 40px; /* Adjust the size of the logo for small screens */
+    margin-bottom: 50;
+  }
+  .dm-sans-heading {
+    font-size: 2em; /* Adjust the size for small screens */
+    margin-bottom: 0;
+  }
+  .content {
+    margin-left: 0;
+    padding-top: 30px; /* Space for the header */
+  }
+}/*# sourceMappingURL=styles.css.map */

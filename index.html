@@ -4,27 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harrison Dorn VFX</title>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
+
 </head>
 <body>
-    <header>
-        <div class="header-content">
+    <header class="topnav wrapper">
+        <span id="nav-label" hidden>Navigation</span>
+        <nav class="topnav">
+            <h1 class="dm-sans-heading">Harrison Dorn</h1>
+            <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
+                <i class="fa-solid fa-bars fa-2xl"></i>
+            </button>
+            <nav class="topnav__menu" role="dialog" aria-labelledby="nav-label">
+                <button id="btnClose" class="topnav__close" aria-label="Close">
+                    <i class="fa-solid fa-x fa-2xl"></i>
+                </button>
+                <!-- <img src="images/logo.svg" alt="Harrison Dorn VFX Logo" class="logo"> -->
+                    <ul class="topnav__links">
+                        <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
+                        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+                        <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+                        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb!</a></li>
+                        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
 
-            <h3 class="dm-sans-heading">Harrison Dorn</h3>
-            <nav>
-                <ul>
-                    <li><a href="about.html" class="dm-sans-body">About</a></li>
-                    <li><a href="contact.html" class="dm-sans-body">Contact</a></li>
-                </ul>
+                    </ul>
+
             </nav>
-            <img src="/images/logo.svg" alt="Harrison Dorn VFX Logo" class="logo">
-        </div>
+        </nav>
+
     </header>
     <div class="content">
         <!-- Main content of the page -->
     </div>
 </body>
+<script src="script.js"></script>
 </html>
