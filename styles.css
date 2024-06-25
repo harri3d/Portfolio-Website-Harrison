@@ -2,56 +2,88 @@
 body, html {
   height: 100%;
   margin: 0;
-  display: flex;
 }
 
 body {
   font-family: "DM Sans", sans-serif;
-  margin: 0;
-  padding: 0;
+  margin: 0 auto;
+  padding-top: 0px;
   background-color: #f9f9f9;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  align-items: top; /* Changed from center to flex-start to align items from the top */
   height: 100vh;
   padding-left: 500px;
+  padding-right: 100px;
 }
-@media (max-width: 768px) {
+@media (max-width: 70em) {
   body {
     justify-content: center; /* Center the content on mobile */
-    padding-left: 0;
-    padding-right: 0; /* Ensure no padding cuts off content */
+    padding-left: 50px;
+    padding-right: 100px; /* Ensure no padding cuts off content */
+    padding-top: 100px;
   }
 }
 
-.about {
-  background-color: white;
+a {
+  text-decoration: none;
+  color: orangered;
+  margin: 5px 0;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+.project {
+  background-color: rgb(255, 255, 255);
   padding: 50px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  padding-top: 100px;
   max-width: 600px;
   width: 100%;
+  padding-left: 500px;
 }
-.about .container {
+
+.container {
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: left;
 }
 
-.project {
-  background-color: white;
-  padding: 50px;
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
+.content {
   width: 100%;
-}
-.project .container {
+  padding: 20px;
+  box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: left;
+  justify-content: center;
+}
+
+.wrapper {
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+  background-color: orange;
+}
+
+.wrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.bottom-item {
+  margin-top: 320px;
+  padding: 50px;
+  text-align: right;
+  border-radius: 5px;
+  border: #333;
+  border-width: 0cap;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 300; /* Adjust the weight as needed for the heading */
+  font-size: 1em; /* Adjust the size as needed for the heading */
 }
 
 .topnav {
@@ -69,6 +101,7 @@ body {
   padding: 0px; /* Adjust padding as needed */
   overflow-y: auto; /* Makes the sidebar scrollable if it gets too tall */
   font-family: "DM Sans", sans-serif;
+  padding-left: 50px;
 }
 .topnav button {
   position: fixed;
@@ -97,7 +130,6 @@ body {
   font-family: "DM Sans", sans-serif;
   font-weight: 500; /* Adjust the weight as needed for the heading */
   font-size: 1em; /* Adjust the size as needed for the heading */
-  padding-left: 50px;
 }
 .topnav__link {
   text-decoration: none; /* Remove underline */
@@ -125,31 +157,49 @@ body {
   font-weight: 600; /* Adjust the weight as needed for the heading */
   font-size: 3.5em; /* Adjust the size as needed for the heading */
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
+}
+
+.dm-sans-subheading {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 900; /* Adjust the weight as needed for the heading */
+  font-size: 2.5em; /* Adjust the size as needed for the heading */
+  margin-bottom: 20px;
+  text-align: left;
 }
 
 .dm-sans-light {
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 200; /* Adjust the weight as needed for the heading */
-  font-size: 4em; /* Adjust the size as needed for the heading */
+  font-size: 3em; /* Adjust the size as needed for the heading */
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .dm-sans-body {
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 200; /* Adjust the weight as needed for the heading */
+  font-weight: 300; /* Adjust the weight as needed for the heading */
   font-size: 1.5em; /* Adjust the size as needed for the heading */
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
 }
 
 .content {
   margin-left: 250px; /* Adjust this value to match the width of the sidebar */
   padding: 20px;
   flex: 1; /* Allows the content to take up the remaining space */
+}
+
+input {
+  margin: 20px 0;
+  width: 100%;
+  padding: 10px;
+  border: 4px solid black;
+  border-radius: 10px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 
 /* Media Query for Small Screens */
