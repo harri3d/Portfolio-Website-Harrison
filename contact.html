@@ -41,18 +41,19 @@
         </nav>
 
     </header>
-    <section class="contact">
-            <form action="mailto:contact@yourdomain.com" method="POST" enctype="multipart/form-data" name="EmailForm" >
-                <h2 class="dm-sans-subheading">let's make something cool together.</h2>
-                <input type="text" size="19" name="Contact-Name" class="input" placeholder="your name"><br>
-                <input type="email" name="Contact-Email" class="input" placeholder="email address"><br>
-                <input type="text" name="Contact-Subject"class="input" placeholder="subject"><br>
-                <textarea class="input" name='Contact-Message' rows="10" cols="10" placeholder="your message" class="input"></textarea><br><br>
-                <button type="submit" value="Submit" class="text-button">Send!</button>
-                <p>You can also reach me at <a href="mailto:contact@harrisondornvfx.com">contact@harrisondornvfx.com</a>.</p>
-            </form>
-    </section>
 
+
+    <section class="contact">
+        <form action="https://formspree.io/f/xjkbbjep" method="POST">
+            <h2 class="dm-sans-subheading">Get in Touch</h2>
+            <input type="text" name="name" class="input" placeholder="your name" required>
+            <input type="email" name="email" class="input" placeholder="email address" required>
+            <input type="text" name="subject" class="input" placeholder="subject">
+            <textarea name="message" class="input" placeholder="your message" required></textarea>
+            <button type="submit" class="text-button">Send!</button>
+            <p>You can also reach me at <a href="mailto:hello@harrisondornvfx.com">hello@harrisondornvfx.com</a>.</p>
+        </form>
+    </section>
 </body>
 <script src="script.js"></script>
 </html>

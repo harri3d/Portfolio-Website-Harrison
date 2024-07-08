@@ -6,19 +6,19 @@ body, html {
 body {
   font-family: "DM Sans", sans-serif;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: rgb(255, 255, 255);
   align-items: top; /* Changed from center to flex-start to align items from the top */
   padding-left: 500px;
-  padding-right: 250px;
+  padding-right: 10%;
   font-weight: 300; /* Adjust the weight as needed for the heading */
   font-size: 1em; /* Adjust the size as needed for the heading */
 }
-@media (max-width: 70em) {
+@media (max-width: 80em) {
   body {
     justify-content: center; /* Center the content on mobile */
     padding-left: 10px;
     padding-right: 10px; /* Ensure no padding cuts off content */
-    padding-top: 100px;
+    padding-top: 40px;
   }
 }
 
@@ -65,9 +65,8 @@ form {
 
 .wrapper {
   position: relative;
-  overflow: hidden;
   padding-top: 56.25%;
-  background-color: orange;
+  margin-top: 20px; /* Adjust the value as needed */
 }
 
 .wrapper iframe {
@@ -79,7 +78,6 @@ form {
 }
 
 .bottom-item {
-  text-align: right;
   border-radius: 5px;
   border: #333;
   border-width: 0cap;
@@ -87,7 +85,7 @@ form {
   font-optical-sizing: auto;
   font-weight: 300; /* Adjust the weight as needed for the heading */
   font-size: 1em; /* Adjust the size as needed for the heading */
-  padding-top: 200px;
+  padding-top: 250px;
 }
 
 .topnav {
@@ -114,7 +112,7 @@ form {
   padding: 0;
   margin-inline-start: auto;
 }
-@media (width >= 70em) {
+@media (width >= 80em) {
   .topnav button {
     display: none;
   }
@@ -170,14 +168,14 @@ form {
 .dm-sans-subheading {
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
-  color: rgb(160, 160, 160);
-  font-weight: 600; /* Adjust the weight as needed for the heading */
-  font-size: 4em; /* Adjust the size as needed for the heading */
+  color: rgb(0, 0, 0);
+  font-weight: 400; /* Adjust the weight as needed for the heading */
+  font-size: 3em; /* Adjust the size as needed for the heading */
   padding: 0px;
-  margin-top: 50px;
-  margin-bottom: 10px;
   text-align: left;
-  line-height: 0.8;
+  line-height: 1.1;
+  margin-top: 50px;
+  margin-bottom: 50px;
 }
 
 .dm-sans-light {
@@ -192,10 +190,22 @@ form {
 .dm-sans-body {
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
-  font-weight: 500; /* Adjust the weight as needed for the heading */
+  font-weight: 300; /* Adjust the weight as needed for the heading */
   font-size: 1.2em; /* Adjust the size as needed for the heading */
   margin-bottom: 20px;
   text-align: left;
+  margin-right: 30%;
+}
+
+.dm-sans-tagline {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 150; /* Adjust the weight as needed for the heading */
+  font-size: 2em; /* Adjust the size as needed for the heading */
+  margin-bottom: 20px;
+  text-align: left;
+  margin-right: 30%;
+  margin-top: 0px;
 }
 
 .content {
@@ -233,8 +243,37 @@ form {
   background-color: #00bd29;
 }
 
+.portfolio-image {
+  width: 100%;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  text-align: left;
+  margin: 0;
+}
+
+.portrait-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  text-align: left;
+  margin: 0;
+}
+
+.goodfornothing-image {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  margin: 0 auto;
+  -o-object-fit: cover;
+     object-fit: cover;
+  margin-top: 60px;
+}
+
 /* Media Query for Small Screens */
-@media (max-width: 70em) {
+@media (max-width: 80em) {
   .topnav {
     width: 100%;
     height: 10px;
@@ -263,15 +302,27 @@ form {
     font-size: 1.2em; /* Adjust the size for small screens */
     margin-bottom: 0;
   }
+  .dm-sans-subheading {
+    font-size: 2em; /* Adjust the size for small screens */
+  }
   .dm-sans-body {
     font-size: 1em; /* Adjust the size for small screens */
     margin-bottom: 0;
-    margin: 0px;
-    padding: 0px;
+    margin-right: 0%;
   }
   form {
     padding-left: 10px;
-    padding-right: 20px;
+    padding-right: 30px;
     padding-top: 10px;
+  }
+  .portfolio-image {
+    max-width: 100%;
+  }
+  .wrapper {
+    position: relative;
+    overflow: hidden;
+  }
+  .goodfornothing-image {
+    display: none;
   }
 }/*# sourceMappingURL=styles.css.map */
