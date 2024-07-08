@@ -11,7 +11,7 @@
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
 </head>
 <body>
-    <header class="topnav wrapper">
+    <header>
         <span id="nav-label" hidden>Navigation</span>
         <nav class="topnav">
             <img src="logo.svg" width=30px class="logo"></img>
@@ -19,19 +19,20 @@
             <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
                 <i class="fa-solid fa-bars fa-2xl"></i>
             </button>
-            <nav class="topnav__menu" role="dialog" aria-labelledby="nav-label">
+
+            <nav class="topnav__menu" role="dialog" aria-labelledby="nav-label" id="topnavMenu">
                 <button id="btnClose" class="topnav__close" aria-label="Close">
                     <i class="fa-solid fa-x fa-2xl"></i>
                 </button>
                 <!-- <img src="images/logo.svg" alt="Harrison Dorn VFX Logo" class="logo"> -->
                     <ul class="topnav__links">
-                        <li class="topnav__item"><a href="index.html" class="topnav__link"><i class="fa-solid fa-house"></i> Home</a></li>
-                        <li class="topnav__item"><a href="about.html" class="topnav__link"><i class="fa-solid fa-question"></i> About</a></li>
-                        <li class="topnav__item"><a href="contact.html" class="topnav__link"><i class="fa-solid fa-envelope"></i> Contact</a></li>
-                        <h3 class="dm-sans-light">projects</h3>
-                        <li class="topnav__item"><a href="cello.html" class="topnav__link"><i class="fa-solid fa-music"></i> Cello</a></li>
-                        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link"><i class="fa-solid fa-bomb"></i> Cannon-Bomb!</a></li>
-                        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link"><i class="fa-solid fa-tornado"></i> Uzumaki</a></li>
+                        <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
+                        <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
+                        <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
+                        <h3 class="dm-sans-light">Projects</h3>
+                        <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+                        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+                        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
 
                     </ul>
                     <div class="bottom-item">
@@ -40,7 +41,6 @@
                     </div>
             </nav>
         </nav>
-
     </header>
     <section>
 

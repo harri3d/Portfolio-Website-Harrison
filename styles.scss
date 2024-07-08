@@ -7,8 +7,10 @@ body, html {
 
 body {
     font-family: "DM Sans", sans-serif;
-    margin: 0 auto;
-    background-color: rgb(255, 255, 255);
+    margin: 0 ;
+    /*background: radial-gradient(circle, rgba(255, 123, 0, 0.219) , rgba(0, 0, 255, 0.041) 50%, rgb(255, 255, 255) 100%);*/
+    background-attachment: fixed;
+    background-repeat: no-repeat;
 
     align-items: top; /* Changed from center to flex-start to align items from the top */
     padding-left: 500px;
@@ -23,7 +25,7 @@ body {
       padding-top: 40px;
     }
     
-}
+} 
 
 a {
     text-decoration: none;
@@ -33,6 +35,7 @@ a {
 
 a:hover {
     text-decoration: underline;
+    color:rgb(255, 123, 0);
 }
 
 
@@ -93,7 +96,7 @@ form {
     font-optical-sizing: auto;
     font-weight: 300; /* Adjust the weight as needed for the heading */
     font-size: 1em; /* Adjust the size as needed for the heading */
-    padding-top: 250px;
+    padding-top: 200px;
 }
 
 .topnav {
@@ -103,8 +106,6 @@ form {
     left: 200px;
     width: 250px; /* Adjust the width of the sidebar as needed */
     height: 100%;
-    background-color: white; /* Adjust the background color as needed */
-    z-index: 1000; /* Ensures the header stays on top */
     display: flex;
     flex-direction: column;
     align-items: left;
@@ -135,7 +136,7 @@ form {
 
     &__links {
         display: flex;
-        gap: 1rem;
+        gap: .2rem;
         margin: 0px;
         padding: 0px;
         margin-bottom: 20px;
@@ -150,7 +151,7 @@ form {
     &__link {
         text-decoration: none; /* Remove underline */
         color: $primary-color; /* Use primary color for text */
-        transition: color 0.3s; /* Smooth transition for hover effect */
+        transition: color .5s; /* Smooth transition for hover effect */
     }
 
     &__item{
@@ -204,7 +205,7 @@ form {
 .dm-sans-light {
     font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 400; /* Adjust the weight as needed for the heading */
+    font-weight: 600; /* Adjust the weight as needed for the heading */
     font-size: 1.5em; /* Adjust the size as needed for the heading */
     margin-bottom: 0px;
     text-align: left;
@@ -254,8 +255,7 @@ form {
 .text-button {
     font-family: "DM Sans", sans-serif;
     font-weight: 700;
-
-    background-color: orangered; /* Button background color */
+    background-color: #333333d3;
     color: white; /* Button text color */
     border: none; /* Remove default border */
     border-radius: 5px; /* Rounded corners */
@@ -266,7 +266,7 @@ form {
 }
 
 .text-button:hover {
-    background-color: #00bd29; 
+    background-color: #55555517;
 }
 
 .portfolio-image {
@@ -291,7 +291,7 @@ form {
     height: auto;
     margin: 0 auto;
     object-fit: cover;
-    margin-top: 60px;
+    margin-top: 20px;
 }
 
 /* Media Query for Small Screens */
