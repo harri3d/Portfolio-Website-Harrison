@@ -20,27 +20,17 @@
     opacity: 1;
   }
 }
-@keyframes reveal {
-  from {
-    background-position-x: 400%;
-    -webkit-mask-position: 100% 0;
-    mask-position: 100% 0;
-  }
-  to {
-    background-position-x: 0%;
-    -webkit-mask-position: 0 0;
-    mask-position: 0% 0;
-  }
-}
 body, html {
   height: 100%;
 }
 
 section {
   animation: transitionIn 0.75s;
+  overflow-x: hidden;
 }
 
 body {
+  overflow-x: hidden;
   font-family: "DM Sans", sans-serif;
   margin: 0;
   /*background: radial-gradient(circle, rgba(255, 123, 0, 0.219) , rgba(0, 0, 255, 0.041) 50%, rgb(255, 255, 255) 100%);*/
@@ -55,8 +45,8 @@ body {
 @media (max-width: 80em) {
   body {
     justify-content: center; /* Center the content on mobile */
-    padding-left: 10px;
-    padding-right: 10px; /* Ensure no padding cuts off content */
+    padding-left: 0px;
+    padding-right: 0px; /* Ensure no padding cuts off content */
     padding-top: 40px;
   }
 }
@@ -125,8 +115,8 @@ form {
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 300; /* Adjust the weight as needed for the heading */
-  font-size: 1em; /* Adjust the size as needed for the heading */
-  padding-top: 350px;
+  font-size: 0.8em; /* Adjust the size as needed for the heading */
+  padding-top: 200px;
 }
 
 .topnav {
@@ -147,10 +137,10 @@ form {
 }
 .topnav button {
   position: fixed;
-  right: 3em;
+  right: 20px;
   background: none;
   border: none;
-  padding: 0;
+  padding: 0px;
   margin-inline-start: auto;
 }
 @media (width >= 80em) {
@@ -171,7 +161,7 @@ form {
   text-align: left;
   font-family: "DM Sans", sans-serif;
   font-weight: 500; /* Adjust the weight as needed for the heading */
-  font-size: 1em; /* Adjust the size as needed for the heading */
+  font-size: 1.2em; /* Adjust the size as needed for the heading */
 }
 .topnav__link {
   text-decoration: none; /* Remove underline */
@@ -207,6 +197,22 @@ form {
 }
 
 .dm-sans-subheading {
+  animation: unblur linear both;
+  animation-timeline: view();
+  animation-range: entry 30% cover 20%;
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  color: rgb(0, 0, 0);
+  font-weight: 400; /* Adjust the weight as needed for the heading */
+  font-size: 3em; /* Adjust the size as needed for the heading */
+  padding: 0px;
+  text-align: left;
+  line-height: 1.1;
+  margin-top: 50px;
+  margin-bottom: 5px;
+}
+
+.dm-sans-intro {
   animation: unblur linear both;
   animation-timeline: view();
   animation-range: entry 30% cover 20%;
@@ -288,19 +294,11 @@ form {
 }
 
 .portfolio-image {
-  background-image: linear-gradient(90deg, black, transparent);
   background-size: 200%;
-  animation: reveal both linear;
+  animation: unblur both linear;
   background-repeat: no-repeat;
   animation-range: entry 0% cover 10%;
   animation-timeline: view();
-  -webkit-mask-image: linear-gradient(90deg, black, transparent);
-  mask-image: linear-gradient(90deg, black, transparent);
-  -webkit-mask-size: 300% 300%;
-  mask-size: 300% 100%;
-  -webkit-mask-position: 300% 0;
-  mask-position: 300% 0;
-  -webkit-mask-repeat: no-repeat;
   width: 100%;
   height: auto;
   -o-object-fit: cover;
@@ -339,6 +337,7 @@ form {
     width: 100%;
     height: 10px;
     left: 0px;
+    right: 0px;
     flex-direction: row;
     justify-content: flex-start;
     align-items: center; /* Center align items vertically */
@@ -346,14 +345,15 @@ form {
   }
   .topnav__menu {
     position: fixed;
-    inset: 0;
-    padding: 50px;
+    inset: 0px;
+    padding: 20px;
     translate: 150vw 0;
-    transition: translate 0.5s ease-in-out;
-    background-color: rgb(0, 252, 0);
+    transition: translate 0.2s ease;
+    background-color: rgb(255, 255, 255);
   }
   .topnav__links {
     flex-direction: column;
+    padding: 10%;
     font-size: 1.5em;
     font-weight: 500;
   }
@@ -366,12 +366,28 @@ form {
     margin-bottom: 0;
   }
   .dm-sans-subheading {
+    font-size: 3em; /* Adjust the size for small screens */
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .dm-sans-intro {
     font-size: 2em; /* Adjust the size for small screens */
+    padding-left: 10px;
+    padding-right: 10px;
   }
   .dm-sans-body {
     font-size: 1.2em; /* Adjust the size for small screens */
     margin-bottom: 0;
     margin-right: 0%;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+  .dm-sans-tagline {
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 1.5em;
+    font-weight: 200;
+    width: 100%;
   }
   form {
     padding-left: 10px;
