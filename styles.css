@@ -25,8 +25,12 @@ body, html {
 }
 
 section {
-  animation: transitionIn 0.75s;
   overflow-x: hidden;
+  animation: transitionIn 0.75s;
+}
+
+div {
+  animation: transitionIn 0.75s;
 }
 
 body {
@@ -120,7 +124,7 @@ form {
 }
 
 .topnav {
-  background-color: white;
+  background-color: rgb(255, 255, 255);
   position: fixed;
   top: 0;
   left: 200px;
@@ -196,6 +200,18 @@ form {
   line-height: 0.9;
 }
 
+.dm-sans-name {
+  font-family: "DM Sans", sans-serif;
+  font-optical-sizing: auto;
+  font-weight: 600; /* Adjust the weight as needed for the heading */
+  font-size: 2.5em; /* Adjust the size as needed for the heading */
+  margin-bottom: 10px;
+  margin-top: 10px;
+  margin-right: 50px;
+  text-align: left;
+  line-height: 0.9;
+}
+
 .dm-sans-subheading {
   animation: unblur linear both;
   animation-timeline: view();
@@ -209,7 +225,7 @@ form {
   text-align: left;
   line-height: 1.1;
   margin-top: 50px;
-  margin-bottom: 5px;
+  margin-bottom: 0px;
 }
 
 .dm-sans-intro {
@@ -359,9 +375,13 @@ form {
   }
   .logo {
     width: 20px; /* Adjust the size of the logo for small screens */
-    padding-bottom: 10px;
+    padding-bottom: 15px;
   }
   .dm-sans-heading {
+    font-size: 1.2em; /* Adjust the size for small screens */
+    margin-bottom: 0;
+  }
+  .dm-sans-name {
     font-size: 1.2em; /* Adjust the size for small screens */
     margin-bottom: 0;
   }
