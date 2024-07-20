@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Refined Sequence Slider</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background-color: #f7f7f7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .slider-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .slider-container:hover {
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .slider-images {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+        }
+
+        .slider-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.2s ease; /* Faster transition */
+            object-fit: cover;
+        }
+
+        .slider-image.active {
+            opacity: 1;
+        }
+
+        .slider-handle {
+            position: absolute;
+            bottom: 20px;
+            left: 5%;
+            width: 90%;
+            height: 4px;
+            background: rgba(255,255,255,0.3);
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: orangered;
+            box-shadow: 0 0 0 4px rgba(255,69,0,0.3);
+            transition: box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .slider-handle:hover .slider-button {
+            box-shadow: 0 0 0 8px rgba(255,69,0,0.3);
+        }
+
+        .image-counter {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            padding: 8px 12px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 400;
+            opacity: 0;
+            transform: translateY(-10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .slider-container:hover .image-counter {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .gradient-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60px;
+            background: linear-gradient(to top, rgba(0,0,0,0.2), transparent);
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="slider-container">
+        <div class="slider-images">
+            <img src="images/sketch01.jpg" alt="Image 1" class="slider-image active">
+            <img src="images/sketch02.jpg" alt="Image 2" class="slider-image">
+            <img src="images/uzumaki_eyeModelingDetail.jpg" alt="Image 3" class="slider-image">
+            <img src="images/fireComp_test01.gif" alt="Image 4" class="slider-image">
+            <img src="images/sketch02.jpg" alt="Image 5" class="slider-image">
+            
+        </div>
+        <div class="gradient-overlay"></div>
+        <div class="slider-handle">
+            <div class="slider-button"></div>
+        </div>
+        <div class="image-counter">1 / 5</div>
+    </div>
+
+    <script>
+        const sliderContainer = document.querySelector('.slider-container');
+        const sliderHandle = document.querySelector('.slider-handle');
+        const sliderButton = document.querySelector('.slider-button');
+        const sliderImages = document.querySelectorAll('.slider-image');
+        const imageCounter = document.querySelector('.image-counter');
+        const imageCount = sliderImages.length;
+
+        let isDragging = false;
+
+        function updateSlider(clientX) {
+            const rect = sliderHandle.getBoundingClientRect();
+            let percentage = (clientX - rect.left) / rect.width;
+            percentage = Math.max(0, Math.min(1, percentage)) * 100;
+
+            const index = Math.round((percentage / 100) * (imageCount - 1));
+
+            sliderImages.forEach((img, i) => {
+                if (i === index) {
+                    img.classList.add('active');
+                    img.style.opacity = 1;
+                } else {
+                    img.classList.remove('active');
+                    img.style.opacity = 0;
+                }
+            });
+
+            sliderButton.style.left = `${percentage}%`;
+            imageCounter.textContent = `${index + 1} / ${imageCount}`;
+        }
+
+        function handleMouseDown(e) {
+            isDragging = true;
+            updateSlider(e.clientX);
+        }
+
+        function handleMouseMove(e) {
+            if (!isDragging) return;
+            updateSlider(e.clientX);
+        }
+
+        function handleMouseUp() {
+            isDragging = false;
+        }
+
+        sliderHandle.addEventListener('mousedown', handleMouseDown);
+        document.addEventListener('mousemove', handleMouseMove);
+        document.addEventListener('mouseup', handleMouseUp);
+
+        sliderContainer.addEventListener('click', (e) => {
+            if (e.target === sliderButton) return;
+            updateSlider(e.clientX);
+        });
+
+        // Initialize
+        updateSlider(sliderHandle.getBoundingClientRect().left);
+    </script>
+</body>
+</html>

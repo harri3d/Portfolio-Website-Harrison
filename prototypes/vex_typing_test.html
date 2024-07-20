@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VEX Code Typewriter with Copy Feature</title>
+    <style>
+        body {
+            font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+            background-color: #1a1a1a;
+            color: #f8f8f2;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .vex-container {
+            background-color: #2b2b2b;
+            border: 1px solid #3c3c3c;
+            border-radius: 3px;
+            width: 400px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .vex-header {
+            background-color: #3c3c3c;
+            color: #dcdcdc;
+            padding: 2px 5px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+        #code-container {
+            background-color: #1e1e1e;
+            padding: 10px 10px 5px 10px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            line-height: 1.4;
+            font-size: 14px;
+            overflow: hidden;
+            transition: height 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+        }
+        .keyword { color: #ff79c6; }
+        .function { color: #50fa7b; }
+        .number { color: #bd93f9; }
+        .comment { color: #6272a4; }
+        .string { color: #f1fa8c; }
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background-color: #f8f8f2;
+            animation: blink 0.7s infinite;
+            vertical-align: middle;
+        }
+        @keyframes blink {
+            0% { opacity: 0; }
+            50% { opacity: 1; }
+            100% { opacity: 0; }
+        }
+        .copy-button {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+            background-color: rgb(65, 65, 65);
+            color: #f8f8f2;
+            border: none;
+            border-radius: 3px;
+            padding: 3px 8px;
+            font-size: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .copy-button:hover {
+            background-color: orangered;
+            transition: 0.3s ease-out;
+            scale: 110%;
+
+        }
+    </style>
+</head>
+<body>
+    <div class="vex-container" id="vex-container">
+        <div class="vex-header">VEXpression</div>
+        <div id="code-container"></div>
+        <button id="copy-button" class="copy-button">Copy</button>
+    </div>
+
+    <script>
+        const vexCode = `float angle;
+
+angle = @Frame * chf("mult") * fit01(rand(@ptnum), chf("min"), chf("max"))+200;
+vector4 orient = quaternion(angle, {0,1,0});
+v@up = v@N;`;
+
+        const vexCodeWithTags = `<span class="keyword">float</span> angle;
+
+angle = <span class="function">@Frame</span> * <span class="function">chf</span>(<span class="string">"mult"</span>) * <span class="function">fit01</span>(<span class="function">rand</span>(<span class="function">@ptnum</span>), <span class="function">chf</span>(<span class="string">"min"</span>), <span class="function">chf</span>(<span class="string">"max"</span>))+<span class="number">200</span>;
+<span class="keyword">vector4</span> orient = <span class="function">quaternion</span>(angle, {<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>});
+v@up = v@N;`;
+
+        const codeContainer = document.getElementById('code-container');
+        const vexContainer = document.getElementById('vex-container');
+        const copyButton = document.getElementById('copy-button');
+        let index = 0;
+        let isTyping = false;
+
+        function easeInOutQuad(t) {
+            return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+        }
+
+        function typeCode(timestamp) {
+            if (!isTyping) return;
+
+            if (!typeCode.startTime) typeCode.startTime = timestamp;
+            const elapsedTime = timestamp - typeCode.startTime;
+            const duration = 1000; // Total animation duration in milliseconds
+
+            if (elapsedTime < duration) {
+                const progress = easeInOutQuad(elapsedTime / duration);
+                index = Math.floor(progress * vexCodeWithTags.length);
+                codeContainer.innerHTML = vexCodeWithTags.slice(0, index) + '<span class="cursor"></span>';
+                adjustHeight();
+                requestAnimationFrame(typeCode);
+            } else {
+                codeContainer.innerHTML = vexCodeWithTags + '<span class="cursor"></span>';
+                adjustHeight();
+                copyButton.style.opacity = '1';
+            }
+        }
+
+        function adjustHeight() {
+            codeContainer.style.height = codeContainer.scrollHeight + 'px';
+        }
+
+        function startTyping() {
+            if (!isTyping) {
+                isTyping = true;
+                index = 0;
+                codeContainer.style.height = '0px';
+                copyButton.style.opacity = '0';
+                typeCode.startTime = null;
+                requestAnimationFrame(typeCode);
+            }
+        }
+
+        function resetTyping() {
+            isTyping = false;
+            index = 0;
+            codeContainer.innerHTML = '';
+            codeContainer.style.height = '0px';
+            copyButton.style.opacity = '0';
+        }
+
+        function copyCode() {
+            navigator.clipboard.writeText(vexCode).then(() => {
+                copyButton.textContent = 'Copied!';
+                setTimeout(() => {
+                    copyButton.textContent = 'Copy';
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+        vexContainer.addEventListener('mouseenter', startTyping);
+        vexContainer.addEventListener('mouseleave', resetTyping);
+        copyButton.addEventListener('click', copyCode);
+
+        // Initial empty state
+        codeContainer.innerHTML = '';
+        codeContainer.style.height = '0px';
+    </script>
+</body>
+</html>
