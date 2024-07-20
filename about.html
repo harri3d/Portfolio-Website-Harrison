@@ -5,11 +5,93 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Harrison Dorn VFX</title>
     <link rel="shortcut icon" type="image/svg" href="images/favicon.svg"/>
-
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
+    <script src="js/vex-typewriter.js"></script>
+    <style>
+
+        body {
+            color: #333;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 1rem;
+            background-color: white;
+            overflow: hidden;
+        }
+
+        .image-column {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .image-column img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .image-column:hover img {
+            transform: scale(1.05);
+        }
+
+        .text-column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+
+        p {
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        .highlight {
+            position: relative;
+            display: inline-block;
+            color: #FF4500;
+            transition: color 0.3s ease;
+        }
+
+        .highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #FF4500;
+            transform: scaleX(0);
+            transition: transform 0.3s ease;
+        }
+
+        .highlight:hover::after {
+            transform: scaleX(1);
+        }
+
+        .particle {
+            position: absolute;
+            background-color: #FF4500;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -26,54 +108,71 @@
                 <button id="btnClose" class="topnav__close" aria-label="Close">
                     <i class="fa-solid fa-x fa-2xl"></i>
                 </button>
-                <!-- <img src="images/logo.svg" alt="Harrison Dorn VFX Logo" class="logo"> -->
-                    <ul class="topnav__links">
-                        <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
-                        <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
-                        <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
-                        <h3 class="dm-sans-light">Projects</h3>
-                        <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
-                        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
-                        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
-                        <div class="bottom-item">
-                            Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
-                            <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
-                        </div>
-                    </ul>
-                    
+                <ul class="topnav__links">
+                    <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
+                    <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
+                    <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
+                    <h3 class="dm-sans-light">Projects</h3>
+                    <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+                    <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+                    <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+                    <div class="bottom-item">
+                        Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
+                        <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
+                    </div>
+                </ul>
             </nav>
         </nav>
     </header>
-    <section>
-        <img src="good-for-nothing.jpg" class="goodfornothing-image"></img>
-        <p></p>
-        <img src="https://placehold.co/400x400/png?text=Portrait" alt="Portrait" class="portrait-image">
-        <h2 class="dm-sans-subheading">About Me</h2>
-        <p class="dm-sans-tagline">
-            Based in Los Angeles | Studying at Gnomon School of Visual Effects | Graduating Summer 2025
-        </p>
-        <p class="dm-sans-body">
-             I'm drawn to VFX because it's the mad science of the art world. Programming, visual design, physical simulation, a grab bag of fascinating topics. There's the power to slightly change one parameter and redefine the laws of physics, watching your experiment unfold like some sort of Rube Goldberg machine. How could <i>that</i> ever get boring?
-        </p>
-        <p class="dm-sans-body">
-            I have a background in traditional drawing and painting and it has a clear influence on the rest of my work. I use a limited palette of colors and shapes, always working from simple to complex, maintaining a hierarchy of values and detail. I try to avoid the 'visual noise' that's all too easy to create with 3D.
-        </p>
-        <p class="dm-sans-body">
-            I draw inspiration from surreal and fantasy art and animation. I like things that aren't afraid to be weird. Beyond my professional interests, I enjoy exploring LA's nature trails and photography, which provides me with better ideas.
-        </p>
-        <p class="dm-sans-body">
-            Currently I'm working on a few short animations to hone my skills and prepare a demo reel. You can check out the WIP projects and breakdown pages in the sidebar. I am a straightforward and down-to-earth person. I'm deeply fascinated by all the things I don't understand. I hope that this website can somewhat reflect how I'm like. Not by using some ugly Squarespace template.
-        </p>
-        <p class="dm-sans-body">
-            Thank you for taking the time to learn a little bit about me! Feel free to get in touch, I am looking forward to hearing from you.
-        </p>
-        <p class="dm-sans-body">
-            - Harrison
-        </p>
-        <span style="display:block; height: 50px;"></span>
+    <div class="container">
+        <div class="image-column">
+            <img src="images/portrait.png" alt="Portrait">
+        </div>
+        <div class="text-column">
+            <h1 class="dm-sans-subheading">About Me</h1>
+            <p style="color: grey; font-size: larger;" >
+                Based in Los Angeles | Studying at Gnomon School of Visual Effects | Graduating Summer 2025
+            </p>
+            <p>I'm drawn to VFX because it's the <span class="highlight">mad science of the art world</span>. Programming, visual design, physical simulation, a grab bag of fascinating topics. There's the power to slightly change one parameter and redefine the laws of physics, watching your experiment unfold like some sort of Rube Goldberg machine. How could <em>that</em> ever get boring?</p>
+            <p>I have a background in traditional drawing and painting and it has a clear influence on the rest of my work. I use a limited palette of colors and shapes, always working from simple to complex, maintaining a hierarchy of values and detail. I try to avoid the 'visual noise' that's all too easy to create with 3D.</p>
+            <p>I draw inspiration from <span class="highlight">surreal and fantasy art and animation</span>. I like things that aren't afraid to be weird. Beyond my professional interests, I enjoy exploring LA's nature trails and photography, which provides me with better ideas.</p>
+            <p>Currently I'm working on a few short animations to hone my skills and prepare a demo reel. You can check out the WIP projects and breakdown pages in the sidebar. I am a straightforward and down-to-earth person. I'm deeply fascinated by all the things I don't understand. I hope that this website can somewhat reflect how I'm like. Not by using some generic Squarespace template.</p>
+            <p>Thank you for taking the time to learn a little bit about me! Feel free to get in touch, I'm looking forward to hearing from you.</p>
+            <p>- Harrison</p>
+        </div>
+    </div>
 
+    <script>
+        function createParticle(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = `${x}px`;
+            particle.style.top = `${y}px`;
+            const size = Math.random() * 5 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            document.body.appendChild(particle);
 
-    </section>
-</body>
-<script src="script.js"></script>
-</html>
+            const animation = particle.animate([
+                { transform: 'translate(0, 0)', opacity: 1 },
+                { transform: `translate(${Math.random() * 100 - 50}px, ${Math.random() * 100 - 50}px)`, opacity: 0 }
+            ], {
+                duration: Math.random() * 1000 + 500,
+                easing: 'cubic-bezier(0, .9, .57, 1)',
+                delay: Math.random() * 200
+            });
+
+            animation.onfinish = () => particle.remove();
+        }
+
+        const highlights = document.querySelectorAll('.highlight');
+        highlights.forEach(highlight => {
+            highlight.addEventListener('mouseenter', () => {
+                for (let i = 0; i < 10; i++) {
+                    const rect = highlight.getBoundingClientRect();
+                    createParticle(rect.left + Math.random() * rect.width, rect.top + Math.random() * rect.height);
+                }
+            });
+        });
+    </script>
+    <script src="js/script.js"></script>

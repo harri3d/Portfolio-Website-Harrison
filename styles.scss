@@ -232,6 +232,7 @@ form {
     margin-top: 20px;
     text-align: left;
     line-height: .9;
+    letter-spacing: 0cap;
 }
 .dm-sans-name {
     font-family: "DM Sans", sans-serif;
@@ -275,7 +276,7 @@ form {
     text-align: left;
     line-height: 1.1;
     margin-top: 50px;
-    margin-bottom: 0px;
+    margin-bottom: 1rem;
     
 
 }
@@ -315,10 +316,12 @@ form {
     font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: 300; /* Adjust the weight as needed for the heading */
-    font-size: 1.2em; /* Adjust the size as needed for the heading */
+    font-size: 1.1em; /* Adjust the size as needed for the heading */
     margin-bottom: 20px;
     text-align: left;
     margin-right: 30%;
+    line-height: 1.6;
+    margin-bottom: 1rem;
 }
 
 
@@ -367,6 +370,54 @@ form {
 .text-button:hover {
     background-color: #55555517;
 }
+
+// Lightbox styles
+.lightbox {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.8);
+    
+    &.active {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    
+    &__content {
+      width: 90%;
+      height: auto;
+      img {
+        width: 100%;
+        height: auto;
+        object-fit: contain;
+      }
+    }
+    
+    &__close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 30px;
+      cursor: pointer;
+    }
+  }
+  
+  // Update portfolio image styles
+  .portfolio-image, .portfolio-image-small {
+    cursor: pointer;
+    transition: opacity 0.1s ease;
+    
+    
+    &:hover {
+      opacity: 0.1;
+    }
+  }
 
 .portfolio-image {
     background-size: 200%;
@@ -430,7 +481,78 @@ $gallery-gap: 5px;
   }
 }
 
+//vex typewriter
 
+.vex-container {
+    background-color: #2b2b2b;
+    border: 1px solid #3c3c3c;
+    border-radius: 3px;
+    width: 400px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    position: relative;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    color: #f8f8f2;
+}
+
+.vex-header {
+    background-color: #3c3c3c;
+    color: #dcdcdc;
+    padding: 2px 5px;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+#code-container {
+    background-color: #1e1e1e;
+    padding: 10px 10px 5px 10px;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    line-height: 1.4;
+    font-size: 14px;
+    overflow: hidden;
+    transition: height 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+.keyword { color: #ff79c6; }
+.function { color: #50fa7b; }
+.number { color: #bd93f9; }
+.comment { color: #6272a4; }
+.string { color: #f1fa8c; }
+
+.cursor {
+    display: inline-block;
+    width: 2px;
+    height: 1.2em;
+    background-color: #f8f8f2;
+    animation: blink 0.7s infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+    0% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.copy-button {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    background-color: #4a4a4a;
+    color: #f8f8f2;
+    border: none;
+    border-radius: 3px;
+    padding: 3px 8px;
+    font-size: 12px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+
+    &:hover {
+        background-color: #5a5a5a;
+    }
+}
 
 .portrait-image {
     text-align: center;

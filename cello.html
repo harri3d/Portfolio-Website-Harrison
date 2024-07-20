@@ -11,6 +11,14 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script src="https://unpkg.com/lucide-react@latest"></script>
+    <script src="js/lightbox.js"></script>
+
 </head>
 <body>
     <header>
@@ -26,21 +34,19 @@
                 <button id="btnClose" class="topnav__close" aria-label="Close">
                     <i class="fa-solid fa-x fa-2xl"></i>
                 </button>
-                <!-- <img src="images/logo.svg" alt="Harrison Dorn VFX Logo" class="logo"> -->
-                    <ul class="topnav__links">
-                        <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
-                        <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
-                        <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
-                        <h3 class="dm-sans-light">Projects</h3>
-                        <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
-                        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
-                        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
-                        <div class="bottom-item">
-                            Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
-                            <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
-                        </div>
-                    </ul>
-                    
+                <ul class="topnav__links">
+                    <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
+                    <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
+                    <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
+                    <h3 class="dm-sans-light">Projects</h3>
+                    <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+                    <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+                    <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+                    <div class="bottom-item">
+                        Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
+                        <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
+                    </div>
+                </ul>
             </nav>
         </nav>
     </header>
@@ -54,7 +60,107 @@
                 </p>
                 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/982161353?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Burning_cello_v07"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
             </p>
+            <div id="lightbox-gallery-root"></div>
 
+            <!-- <script type="text/babel">
+                const { useState, useRef, useEffect } = React;
+
+                const images = [
+                    { src: "images/fireComp_test01.gif", alt: "Project Image 1" },
+                    { src: "https://picsum.photos/1600/900?random=2", alt: "Project Image 2" },
+                    { src: "https://picsum.photos/1600/900?random=3", alt: "Project Image 3" },
+                    { src: "https://picsum.photos/1600/900?random=4", alt: "Project Image 4" },
+                ];
+
+                const LightboxGallery = () => {
+                    const [lightboxOpen, setLightboxOpen] = useState(false);
+                    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+                    const lightboxRef = useRef(null);
+
+                    const openLightbox = (index) => {
+                        setCurrentImageIndex(index);
+                        setLightboxOpen(true);
+                    };
+
+                    const closeLightbox = () => {
+                        setLightboxOpen(false);
+                    };
+
+                    const nextImage = () => {
+                        setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+                    };
+
+                    const prevImage = () => {
+                        setCurrentImageIndex((prevIndex) => (prevIndex - 1 + images.length) % images.length);
+                    };
+
+                    useEffect(() => {
+                        if (lightboxOpen) {
+                            document.body.style.overflow = 'hidden';
+                        } else {
+                            document.body.style.overflow = 'unset';
+                        }
+                    }, [lightboxOpen]);
+
+                    return (
+                        <div className="p-4">
+                            <h2 className="dm-sans-subheading mb-4">Project Gallery</h2>
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                {images.map((image, index) => (
+                                    <div
+                                        key={index}
+                                        className="relative overflow-hidden cursor-pointer group"
+                                        onClick={() => openLightbox(index)}
+                                    >
+                                        <div className="aspect-w-16 aspect-h-9">
+                                            <img
+                                                src={image.src}
+                                                alt={image.alt}
+                                                className="w-full h-full object-cover transition-all duration-300 ease-out group-hover:scale-105"
+                                            />
+                                        </div>
+                                        <div className="absolute inset-0 bg-gradient-to-r from-orange-500 via-red-500 to-yellow-500 opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-30" />
+                                        <div className="absolute inset-0 flex items-center justify-center opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100">
+
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                            {lightboxOpen && (
+                                <div className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50">
+                                    <div className="relative w-full h-full flex items-center justify-center">
+                                        <img
+                                            src={images[currentImageIndex].src}
+                                            alt={images[currentImageIndex].alt}
+                                            className="max-w-[100%] max-h-[100%] object-contain transform scale-130"
+                                        />
+                                        <button
+                                            className="absolute top-4 right-4 text-white text-4xl hover:text-gray-300 transition-colors"
+                                            onClick={closeLightbox}
+                                        >
+                                            ×
+                                        </button>
+                                        <button
+                                            className="absolute left-4 top-1/2 transform -translate-y-1/2 text-white text-6xl hover:text-gray-300 transition-colors"
+                                            onClick={prevImage}
+                                        >
+                                            ‹
+                                        </button>
+                                        <button
+                                            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-white text-6xl hover:text-gray-300 transition-colors"
+                                            onClick={nextImage}
+                                        >
+                                            ›
+                                        </button>
+                                    </div>
+                                </div>
+                            )}
+                        </div>
+                    );
+                };
+
+                ReactDOM.render(<LightboxGallery />, document.getElementById('lightbox-gallery-root'));
+            </script> -->
             <h3 class="dm-sans-heading3">Concept - Inspiration</h3>
             <p class="dm-sans-body">
                 The idea for this project started with a fire assignment for Dynamics class. I created a procedural animation using Maya expressions and set it to 2CELLOS' classical cover of 'Thunderstruck'. The result was unexpectedly promising, and I started to build more of a story in my head.
@@ -83,6 +189,13 @@
             <span style="display:block; height: 100px;"></span>
 
         </div>
+        <!-- <div class="lightbox">
+            <div class="lightbox__content">
+                <img src="" alt="Lightbox Image">
+            </div>
+            <span class="lightbox__close">&times;</span>
+        </div> -->
+
 </body>
-<script src="script.js"></script>
+<script src="js/script.js"></script>
 </html>
