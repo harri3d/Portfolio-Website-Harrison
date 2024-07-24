@@ -14,10 +14,10 @@
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
-    <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://unpkg.com/lucide@latest"></script>
     <script src="https://unpkg.com/lucide-react@latest"></script>
     <script src="js/lightbox.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 
 </head>
 <body>
@@ -181,6 +181,96 @@
             <h3 class="dm-sans-heading3">Pre-viz</h3>
             <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/982159027?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Burning Cello Previs"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
             <h3 class="dm-sans-heading3">Matte Painting Photoshop + Nuke</h3>
+            <p class="dm-sans-body">
+                There's something captivating about the eerie atmosphere of abandoned theaters. I knew that I could save a lot of work by using a matte painting, because I only really needed one wide shot to get a sense of the environment. Learning to use projections in Nuke was a challenge. A 3D blockout served as the foundation for my painting. Then I took the render into Photoshop, where I painted layers of detail, decay, and atmosphere.
+            </p>
+            <div class="slider-container">
+                <img src="images/matte_v05.png" alt="Render" class="slider-image">
+
+                <div class="slider-image-overlay">
+                    <img src="images/MP_render.png" alt="Painting" class="slider-image">
+
+                </div>
+                <div class="slider-handle"></div>
+                <div class="slider-label before">Painting</div>
+                <div class="slider-label after">Render</div>
+            </div>
+        
+            <script>
+                const container = document.querySelector('.slider-container');
+                const overlay = document.querySelector('.slider-image-overlay');
+                const handle = document.querySelector('.slider-handle');
+                const beforeImage = overlay.querySelector('.slider-image');
+                const beforeLabel = document.querySelector('.slider-label.before');
+                const afterLabel = document.querySelector('.slider-label.after');
+
+                let isDragging = false;
+
+                const getPercentage = (clientX) => {
+                    const dims = container.getBoundingClientRect();
+                    const percentage = ((clientX - dims.left) / dims.width) * 100;
+                    return Math.min(Math.max(percentage, 0), 100);
+                };
+
+                const slide = (percentage) => {
+                    overlay.style.width = `${percentage}%`;
+                    handle.style.left = `${percentage}%`;
+                    beforeLabel.style.opacity = percentage > 15 ? 1 : 0;
+                    afterLabel.style.opacity = percentage < 85 ? 1 : 0;
+                };
+
+                const getClientX = (event) => {
+                    return event.touches ? event.touches[0].clientX : event.clientX;
+                };
+
+                const onStart = (event) => {
+                    isDragging = true;
+                    slide(getPercentage(getClientX(event)));
+                    event.preventDefault();
+                };
+
+                const onMove = (event) => {
+                    if (!isDragging) return;
+                    slide(getPercentage(getClientX(event)));
+                    event.preventDefault();
+                };
+
+                const onEnd = () => {
+                    isDragging = false;
+                };
+
+                handle.addEventListener('mousedown', onStart);
+                handle.addEventListener('touchstart', onStart);
+
+                document.addEventListener('mousemove', onMove);
+                document.addEventListener('touchmove', onMove);
+
+                document.addEventListener('mouseup', onEnd);
+                document.addEventListener('touchend', onEnd);
+
+                container.addEventListener('click', (event) => slide(getPercentage(getClientX(event))));
+
+                // Initialize slider position and image size
+                const initSlider = () => {
+                    beforeImage.style.width = `${container.offsetWidth}px`;
+                    slide(33.33); // Set to one-third (33.33%)
+                };
+
+                window.addEventListener('load', initSlider);
+
+                // Adjust image size on window resize
+                window.addEventListener('resize', () => {
+                    beforeImage.style.width = `${container.offsetWidth}px`;
+                });
+
+                // Prevent default drag behavior on images
+                container.querySelectorAll('img').forEach(img => {
+                    img.addEventListener('dragstart', (e) => e.preventDefault());
+                });
+            </script>
+            <p class="dm-sans-body">
+                By projecting it onto the original geometry in Nuke, I could bring the 2D painting back into 3D space. It doesn't need to be complicated, either. I was pleasantly surprised by how straightforward it was to implement some nice volumetric fog using 3D cards.             
+            </p>
             <h3 class="dm-sans-heading3">Texturing</h3>
             <h3 class="dm-sans-heading3">Lighting, Color Grading <i class="fa-solid fa-wrench"></i></h3>
             <p class="dm-sans-body">
@@ -189,12 +279,12 @@
             <span style="display:block; height: 100px;"></span>
 
         </div>
-        <!-- <div class="lightbox">
+        <div class="lightbox">
             <div class="lightbox__content">
                 <img src="" alt="Lightbox Image">
             </div>
             <span class="lightbox__close">&times;</span>
-        </div> -->
+        </div>
 
 </body>
 <script src="js/script.js"></script>
