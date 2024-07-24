@@ -5,16 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Harrison Dorn VFX</title>
     <link rel="shortcut icon" type="image/svg" href="images/favicon.svg"/>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
-    <script src="js/vex-typewriter.js"></script>
-    <style>
+    <link rel="stylesheet" href="styles.css">
+    
 
-        body {
-            color: #333;
-        }
+
+    <style>
 
         .container {
             display: grid;
@@ -25,29 +23,12 @@
             background-color: white;
             overflow: hidden;
         }
-
         .image-column {
             position: relative;
-            overflow: hidden;
+            perspective: 1000px;
         }
 
-        .image-column img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 10px;
-            transition: transform 0.3s ease;
-        }
 
-        .image-column:hover img {
-            transform: scale(1.05);
-        }
-
-        .text-column {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
 
 
         p {
@@ -91,8 +72,81 @@
                 grid-template-columns: 1fr;
             }
         }
+        .glass-card {
+            position: relative;
+            margin-top:30%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 
+                0 8px 32px 0 rgba(31, 38, 135, 0.144);
+            transition: transform 0.1s ease;
+            transform-style: preserve-3d;
+                    /* Adjust the media query to target tablets */
+            @media (max-width: 1024px) and (min-width: 769px) {
+                .glass-card {
+                    transition: transform 0.3s ease;
+
+                }
+            }
+
+            /* Mobile styles remain the same */
+            @media (max-width: 768px) {
+                /* ... previous mobile styles ... */
+                margin-top:0px;
+
+            }
+        }
+
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.5));
+            z-index: -1;
+            filter: blur(20px);
+            border-radius: 25px;
+        }
+        
+
+        .glass-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transform: translateZ(20px);
+            transition: transform 0.3s ease-out;
+
+        }
+        .glass-card:hover img {
+            transform: scale(1.03); /* Additional scale for the image */
+        }
+
+
+        .highlight-card {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at var(--x) var(--y), rgba(255, 170, 100, 0.11) 0%, rgba(255,255,255,0) 70%);
+            mix-blend-mode:screen;
+            pointer-events: none;
+            border-radius: 15px;
+            opacity: 0; /* Start with the highlight invisible */
+            transition: opacity 0.3s ease; /* Add transition for smooth fade */
+        }
+
+        .text-column {
+            flex: 2;
+        }
+
+
+
     </style>
-</head>
 
 <body>
     <header>
@@ -124,13 +178,16 @@
             </nav>
         </nav>
     </header>
-    <div class="container">
-        <div class="image-column">
-            <img src="images/portrait.png" alt="Portrait">
+    <div class="container" >
+        <div class="image-column" style="justify-content: center">
+            <div class="glass-card">
+                <img src="images/portrait.png" alt="Placeholder portrait image">
+                <div class="highlight-card"></div>
+            </div>
         </div>
         <div class="text-column">
-            <h1 class="dm-sans-subheading">About Me</h1>
-            <p style="color: grey; font-size: larger;" >
+            <h2 class="dm-sans-subheading">About Me - Hi!</h2>
+            <p style=" font-size: larger;" >
                 Based in Los Angeles | Studying at Gnomon School of Visual Effects | Graduating Summer 2025
             </p>
             <p>I'm drawn to VFX because it's the <span class="highlight">mad science of the art world</span>. Programming, visual design, physical simulation, a grab bag of fascinating topics. There's the power to slightly change one parameter and redefine the laws of physics, watching your experiment unfold like some sort of Rube Goldberg machine. How could <em>that</em> ever get boring?</p>
@@ -139,8 +196,13 @@
             <p>Currently I'm working on a few short animations to hone my skills and prepare a demo reel. You can check out the WIP projects and breakdown pages in the sidebar. I am a straightforward and down-to-earth person. I'm deeply fascinated by all the things I don't understand. I hope that this website can somewhat reflect how I'm like. Not by using some generic Squarespace template.</p>
             <p>Thank you for taking the time to learn a little bit about me! Feel free to get in touch, I'm looking forward to hearing from you.</p>
             <p>- Harrison</p>
+
         </div>
+        
+
+        
     </div>
+    
 
     <script>
         function createParticle(x, y) {
@@ -176,3 +238,76 @@
         });
     </script>
     <script src="js/script.js"></script>
+    <script>
+        const glassCard = document.querySelector('.glass-card');
+        const highlight = document.querySelector('.highlight-card');
+
+        function applyTransform(rotateX, rotateY) {
+            const translateX = glassCard.matches(':hover') ? 5 : 0;
+            const scale = glassCard.matches(':hover') ? 1.01 : 1;
+            glassCard.style.transform = `translateX(${translateX}px) scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+        }
+
+        function calculateRotation(x, y, width, height) {
+            const centerX = width / 2;
+            const centerY = height / 2;
+            const rotateY = (x - centerX) / 200;
+            const rotateX = (centerY - y) / 500;
+            return { rotateX, rotateY };
+        }
+
+        function handleMouseMove(e) {
+            const { left, top, width, height } = glassCard.getBoundingClientRect();
+            const x = e.clientX - left;
+            const y = e.clientY - top;
+
+            const { rotateX, rotateY } = calculateRotation(x, y, width, height);
+            applyTransform(rotateX, rotateY);
+
+            highlight.style.setProperty('--x', `${x}px`);
+            highlight.style.setProperty('--y', `${y}px`);
+            highlight.style.opacity = '1'; // Show highlight
+        }
+
+        function handleMouseLeave() {
+            resetCardPosition();
+            highlight.style.opacity = '0'; // Hide highlight
+        }
+
+        function resetCardPosition() {
+            applyTransform(0, 0);
+        }
+
+        function handleTouch(e) {
+            e.preventDefault();
+            const touch = e.touches[0];
+            const { left, top, width, height } = glassCard.getBoundingClientRect();
+            const x = touch.clientX - left;
+            const y = touch.clientY - top;
+
+            const { rotateX, rotateY } = calculateRotation(x, y, width, height);
+            applyTransform(rotateX, rotateY);
+
+            highlight.style.setProperty('--x', `${x}px`);
+            highlight.style.setProperty('--y', `${y}px`);
+            highlight.style.opacity = '1'; // Show highlight
+
+            // Set a timeout to reset the position and hide highlight after a short delay
+            setTimeout(() => {
+                resetCardPosition();
+                highlight.style.opacity = '0'; // Hide highlight
+            }, 500);
+        }
+
+        glassCard.addEventListener('mousemove', handleMouseMove);
+        glassCard.addEventListener('mouseleave', handleMouseLeave);
+        glassCard.addEventListener('touchstart', handleTouch);
+        glassCard.addEventListener('touchmove', handleTouch);
+
+        // Remove transform on window resize to prevent issues
+        window.addEventListener('resize', resetCardPosition);
+    </script>
+
+
+    </body>
+</html>

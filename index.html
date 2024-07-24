@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harrison Dorn VFX</title>
     <link rel="shortcut icon" type="image/svg" href="images/favicon.svg"/>
-    <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
@@ -35,6 +35,123 @@
             max-height: 90vh;
             object-fit: contain;
         }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            overflow: hidden; /* Prevent scrollbar */
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3 / 2; /* Maintain aspect ratio */
+            border-radius: 6px;
+            transition: box-shadow 0.3s ease-in-out;
+            margin: 10px;
+
+
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 123, 0, 0.808), rgb(255, 72, 0));
+            opacity: 0;
+            mix-blend-mode: overlay;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+
+
+
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+
+
+        }
+        .project-card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.116);
+            }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .about-image-link {
+        display: inline-block;
+        border-radius: 30px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease-out;
+        }
+        .about-image-link img {
+            display: block;
+            width: 5rem;
+            height: 5rem;
+            object-fit: cover;
+        }
+        .about-image-link:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.13);
+            transform: scale(1.03);
+
+        }
+        .container {
+            height: 100vh;
+            overflow-y: scroll;
+        }
+
+        .card {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: visible;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .card-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            will-change: transform;
+            transition: transform 0.3s ease-out; /* Increased duration for smoother effect */
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.055);
+            opacity: 0;
+            transform: scale(0.97);
+            transition: 
+                opacity .7s ease-in-out, /* Increased duration */
+                transform .7s ease-in-out; /* Increased duration */
+            will-change: opacity, transform;
+        }
+        .card.active img {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .card.above img {
+            opacity: 0;
+            transform: scale(0.97);
+        }
     </style>
 
 </head>
@@ -52,50 +169,51 @@
                 <button id="btnClose" class="topnav__close" aria-label="Close">
                     <i class="fa-solid fa-x fa-2xl"></i>
                 </button>
-                <!-- <img src="images/logo.svg" alt="Harrison Dorn VFX Logo" class="logo"> -->
-                    <ul class="topnav__links">
-                        <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
-                        <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
-                        <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
-                        <h3 class="dm-sans-light">Projects</h3>
-                        <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
-                        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
-                        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
-                        <div class="bottom-item">
-                            Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
-                            <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
-                        </div>
-                    </ul>
-                    
+                <ul class="topnav__links">
+                    <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
+                    <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
+                    <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
+                    <h3 class="dm-sans-light">Projects</h3>
+                    <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+                    <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+                    <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+                    <div class="bottom-item">
+                        Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
+                        <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
+                    </div>
+                </ul>
             </nav>
         </nav>
     </header>
-    <div>
-        <!--<div class="wrapper">
-             <iframe src="https://youtube.com/embed/GWfASu-pZ1Y"></iframe>
-            
-        </div> -->
-            <span style="display:block; height: 50px;"></span>
+    <div class="container">
 
-            <img src="images/fireComp_test01.gif" alt="Simulation or destruction effect example" class="portfolio-image">
+            <span style="display:block; height: 50px;"></span>
+            <div class="card">
+                <div class="card-content">
+                    <img src="images/fireComp_test01.gif" alt="Simulation or destruction effect example" class="portfolio-image">
+                </div>
+            </div>
             <h3 class="dm-sans-intro">
                 Welcome! I'm an FX Artist and 3D generalist. I conjure digital mayhem through effects and simulations.
             </h3>
-            <img src="https://placehold.co/1900x1000/png?text=Something+Really+Cool" alt="Digital nature artwork" class="portfolio-image">
+            <div class="card">
+                <div class="card-content">
+                    <img src="https://placehold.co/1900x1000/png?text=Something+Really+Cool" alt="Image 1" loading="lazy" class="portfolio-image">
+                </div>
+            </div>
             <h3 class="dm-sans-intro">
                 It all began with a deep appreciation for nature's complexity. Sketching, drawing, painting it. Evolving into a passion for simulating its underlying principles.
             </h3>
-        
-            <img src="https://placehold.co/800x400/png?text=Something+Really+Cool" alt="Digital nature artwork" class="portfolio-image">
-    
-            <h3 class="dm-sans-intro">
-                Currently studying at Gnomon School of VFX, developing my skills in simulation and destruction.
-            </h3>
+            <div class="card">
+                <div class="card-content">
+                    <img src="https://placehold.co/1900x1000/png?text=Something+Really+Cool" alt="Image 1" loading="lazy" class="portfolio-image">
+                </div>
+            </div>
+                <h3 class="dm-sans-intro">
+                    Currently studying at Gnomon School of VFX, developing my skills in simulation and destruction.
+                </h3>
 
-            <p class="dm-sans-body" style="color: orangered;">
-                <i class="fa-solid fa-wrench"></i> This site is under construction, video links are private. There's not a demo reel here yet. However, you can check out some WIPs in the Projects sidebar. I'm keeping track of my progress here in the meantime :) 
-            </p>
-            <span style="display:block; height: 100px;"></span>
+            
 
 
             <div class="lightbox">
@@ -104,11 +222,118 @@
                 </div>
                 <span class="lightbox__close">&times;</span>
               </div>
+            <!-- Featured Projects -->
+
+                <h3 id="featured-projects" class="dm-sans-light">Featured Projects</h3>
+                
+                <div class="projects-grid">
+                  <a href="cello.html" class="project-card">
+                    <img src="https://placehold.co/600x400/png?text=Cello+Project" alt="Cello Project" class="project-image">
+                    <div class="project-overlay"></div>
+                  </a>
+                  
+                  <a href="cannon-bomb.html" class="project-card">
+                    <img src="https://placehold.co/600x400/png?text=Cannon-Bomb+Project" alt="Cannon-Bomb Project" class="project-image">
+                    <div class="project-overlay"></div>
+                  </a>
+                  <a href="uzumaki.html" class="project-card">
+                    <img src="https://placehold.co/600x400/png?text=Uzumaki+Project" alt="Uzumaki Project" class="project-image">
+                    <div class="project-overlay"></div>
+                  </a>
+                </div>
+
+
+            <!-- About Me Preview -->
+            <section style="margin-bottom: 4rem; padding-left: 1rem; padding-right: 1rem;">
+                <h3 class="dm-sans-light" style="margin-left:0px;">About Me</h3>
+                <div style="display: flex; flex-direction: column; align-items: flex-start; ">
+                    <a href="about.html" class="about-image-link">
+                        <img src="images/portrait.png" alt="Harrison Dorn">
+                    </a>
+                    <div >
+                        <p>Hey there! I'm Harrison, an FX artist based in Los Angeles. Currently diving deep into the world of VFX at Gnomon School, set to graduate in Summer 2025.</p>
+                        <a href="about.html">Read more</a>
+                    </div>
+                </div>
+            </section>
+            <p class="dm-sans-body" style="color: orangered;">
+                <i class="fa-solid fa-wrench"></i> This site is under construction, video links are private. There's not a demo reel here yet. However, you can check out some WIPs in the Projects sidebar. I'm keeping track of my progress here in the meantime :) 
+            </p>
+
 
         
+
+            <span style="display:block; height: 50px;"></span>
+
+
+
+
     </div>
        
     
 </body>
 <script src="js/script.js"></script>
+<script>
+        const container = document.querySelector('.container');
+        const cards = document.querySelectorAll('.card');
+        let lastScrollTop = container.scrollTop;
+        let ticking = false;
+
+        const updateCardClasses = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    entry.target.classList.remove('above');
+                } else {
+                    entry.target.classList.remove('active');
+                    const rect = entry.boundingClientRect;
+                    if (rect.top > window.innerHeight) {
+                        entry.target.classList.remove('above');
+                    } else if (rect.bottom < 0) {
+                        entry.target.classList.add('above');
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(updateCardClasses, {
+            threshold: [0, 0.1, 0.5, 1],
+            rootMargin: '-5% 0px -5% 0px'
+        });
+
+        cards.forEach(card => observer.observe(card));
+
+        const parallaxEffect = () => {
+            const scrolled = container.scrollTop;
+            const scrollDiff = scrolled - lastScrollTop;
+            
+            cards.forEach((card) => {
+                const cardContent = card.querySelector('.card-content');
+                const rect = card.getBoundingClientRect();
+                const centerY = rect.top + rect.height / 2;
+                const distanceFromCenter = centerY - window.innerHeight / 2;
+                
+                let yPos = parseFloat(cardContent.getAttribute('data-y') || 0);
+                yPos -= scrollDiff * 0.15 * (distanceFromCenter / window.innerHeight); // Reduced from 0.5 to 0.15
+                yPos = Math.max(-20, Math.min(45, yPos)); // Reduced from ±150 to ±45
+                
+                cardContent.style.transform = `translateY(${yPos}px)`;
+                cardContent.setAttribute('data-y', yPos);
+            });
+
+            lastScrollTop = scrolled;
+        };
+
+        container.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    parallaxEffect();
+                    observer.takeRecords().forEach(entry => updateCardClasses([entry], observer));
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+</script>
+
 </html>
