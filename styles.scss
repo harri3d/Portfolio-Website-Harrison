@@ -577,7 +577,7 @@ $gallery-gap: 5px;
 $accent-color: orangered;
 $background-color: #f0f0f0;
 $font-family: 'DM Sans', sans-serif;
-$slider-width: 4px;
+$slider-width: 2px;
 $dot-size: 24px;
 $dot-hover-size: 28px;
 
@@ -605,12 +605,11 @@ $dot-hover-size: 28px;
   margin: 0 auto;
 
   user-select: none;
-  border-radius: 10px;
   transition: box-shadow 0.3s ease;
   -webkit-tap-highlight-color: transparent;
 
   &:hover {
-    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.123);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.199);
   }
 }
 
