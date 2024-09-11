@@ -11,38 +11,40 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
-    <script src="lightbox.js"></script>
+    <script src="js/lightbox.js"></script>
 
 </head>
 <body>
     <header>
         <span id="nav-label" hidden>Navigation</span>
         <nav class="topnav">
-            <img src="images/logo.svg" width=30px class="logo"></img>
+            <!--<img src="images/logo.svg" width=30px class="logo"></img> -->
+            <img src="https://raw.githubusercontent.com/harri3d/Portfolio-Website-Harrison/8bf8d488a439a78c5cde4038d8541cf39c7cdaec/images/logo.svg" class="logo">
             <h1 class="dm-sans-name">HARRISON DORN</h1>
             <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
-                <i class="fa-solid fa-bars fa-2xl"></i>
+                <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
             </button>
 
             <nav class="topnav__menu" role="dialog" aria-labelledby="nav-label" id="topnavMenu">
                 <button id="btnClose" class="topnav__close" aria-label="Close">
-                    <i class="fa-solid fa-x fa-2xl"></i>
+                    <i class="fa-solid fa-x fa-2xl" style="color: #ffffff;"></i>
                 </button>
-                <!-- <img src="images/logo.svg" alt="Harrison Dorn VFX Logo" class="logo"> -->
-                    <ul class="topnav__links">
-                        <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
-                        <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
-                        <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
-                        <h3 class="dm-sans-light">Projects</h3>
-                        <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
-                        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
-                        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
-                        <div class="bottom-item">
-                            Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
-                            <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
-                        </div>
-                    </ul>
-                    
+                <ul class="topnav__links">
+                    <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
+                    <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
+                    <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
+                     <!-- <h3 class="dm-sans-light">PROJECTS</h3> -->
+                    <div>
+                      <hr/>
+                    </div>
+                    <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+                    <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+                    <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+                    <!-- <div class="bottom-item">
+                        Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
+                        <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
+                    </div> -->
+                </ul>
             </nav>
         </nav>
     </header>
@@ -53,6 +55,9 @@
             <p class="dm-sans-body" style="color: orangered;">
                 <i class="fa-solid fa-wrench"></i> = currently working on
             </p>
+            <div class="wrapper">
+                <iframe src="https://player.vimeo.com/video/1007896599?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" width="1920" height="1080" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="uzumaki previs"></iframe>
+            </div>
             <p class="dm-sans-body">
                 The eerie imagery of Junji Ito, master of horror manga, has always stuck in my mind. When I first read Uzumaki, the story was so clear and visceral that for days afterward, it was like the panels were inked on the back of my eyelids.
             </p>
@@ -92,13 +97,13 @@
 
 
 
-    </div>
-    <div class="lightbox">
-        <div class="lightbox__content">
-            <img src="" alt="Lightbox Image">
-        </div>
-        <span class="lightbox__close">&times;</span>
-      </div>
+
+            <div class="lightbox">
+                <div class="lightbox__content">
+                    <img src="" alt="Lightbox Image">
+                </div>
+                <span class="lightbox__close">&times;</span>
+            </div>
 
 </body>
 <script src="js/script.js"></script>

@@ -1,5 +1,9 @@
-$primary-color: #333;
+$primary-color: #FFFFFF;
 $hover-color: #555; /* Change to your desired hover color */
+$background-color: #000000; /* Change to your desired hover color */
+$text-base-color: #FFFFFF; /* Change to your desired hover color */
+$heading-color: #FFFFFF; /* Change to your desired hover color */
+$low-contrast-color: #2D2E30; 
 
 
 @keyframes transitionIn {
@@ -34,6 +38,7 @@ $hover-color: #555; /* Change to your desired hover color */
     display: flex;
     flex-direction: column;
     justify-content: center;
+
 }
 
 
@@ -45,12 +50,18 @@ body, html {
 section {
     overflow-x: hidden;
     animation: transitionIn 0.75s;
-
-
-
 }
+
+hr {
+  width: 70%;
+  height: 3px;
+  background-color: $low-contrast-color;
+  border: none;
+}
+  
 div {
     animation: transitionIn 0.75s;
+
 
 }
 
@@ -58,13 +69,14 @@ body {
     overflow-x: hidden;
     font-family: "DM Sans", sans-serif;
     margin: 0 ;
-    /*background: radial-gradient(circle, rgba(255, 123, 0, 0.219) , rgba(0, 0, 255, 0.041) 50%, rgb(255, 255, 255) 100%);*/
+    background: $background-color;
     background-attachment: fixed;
     background-repeat: no-repeat;
+    color: $text-base-color;
 
     align-items: top; /* Changed from center to flex-start to align items from the top */
-    padding-left: 500px;
-    padding-right: 10%;
+    padding-left: 270px;
+    padding-right: 150px;
     font-weight: 300; /* Adjust the weight as needed for the heading */
     font-size: 1em; /* Adjust the size as needed for the heading */
 
@@ -85,7 +97,7 @@ a {
 
 a:hover {
     color: orangered;
-    transition: 0.3s;
+    transition: 0.15s;
 }
 
 
@@ -116,9 +128,8 @@ form {
 
 .wrapper {
     position: relative;
-
     padding-top: 56.25%;
-    margin-top: 20px; /* Adjust the value as needed */
+    margin-top: 0px; /* Adjust the value as needed */
 
 }
 .wrapper iframe{
@@ -127,10 +138,26 @@ form {
     left: 0;
     width:100%;
     height: 100%;
-    z-index: -10;
+
 
 
 }
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 1rem;
+  margin-left: 200px;
+  overflow: hidden;
+
+  // Media query for tablets
+  @media (max-width: 1500px) {
+    margin-left: 1rem;
+  }
+}
+
 
 .bottom-item {
 
@@ -145,19 +172,20 @@ form {
 }
 
 .topnav {
-    background-color: rgb(255, 255, 255);
     position: fixed;
     top: 0;
-    left: 200px;
-    width: 250px; /* Adjust the width of the sidebar as needed */
+    left: 10px;
+    width: 200px; /* Adjust the width of the sidebar as needed */
     height: 100%;
     display: flex;
     flex-direction: column;
-    align-items: left;
+    text-align: right;
+
     padding: 0px; /* Adjust padding as needed */
     overflow-y: auto; /* Makes the sidebar scrollable if it gets too tall */
     font-family: "DM Sans", sans-serif;
-    padding-left: 20px;
+    padding-left: 0px;
+    padding-top: 10%;
     z-index: 10;
 
     button{
@@ -187,7 +215,7 @@ form {
         padding: 0px;
         margin-bottom: 20px;
         flex-direction: column;
-        text-align: left;
+        text-align: right;
         font-family: "DM Sans", sans-serif;
         font-weight: 500; /* Adjust the weight as needed for the heading */
         font-size: 1.2em; /* Adjust the size as needed for the heading */
@@ -197,7 +225,7 @@ form {
     &__link {
         text-decoration: none; /* Remove underline */
         color: $primary-color; /* Use primary color for text */
-        transition: color .1s ease-in-out; /* Smooth transition for hover effect */
+        transition: color .03s ease-in-out; /* Smooth transition for hover effect */
     }
 
     &__item{
@@ -217,10 +245,13 @@ form {
 
 .logo {
     display: flex;
-    width: 100px; /* Adjust the size of the logo as needed */
+    width: 50px; /* Adjust the size of the logo as needed */
     height: auto;
     margin-top: 20px;
-    margin-right: 10px;
+    margin-right: 0px;
+    margin-left: 70%;
+
+    text-align: right;
     
 }
 
@@ -239,11 +270,11 @@ form {
     font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600; /* Adjust the weight as needed for the heading */
-    font-size: 2.5em; /* Adjust the size as needed for the heading */
+    font-size: 2em; /* Adjust the size as needed for the heading */
     margin-bottom: 10px;
     margin-top: 10px;
-    margin-right:50px;
-    text-align: left;
+    margin-right:0px;
+    text-align: right;
     line-height: .9;
 }
 
@@ -253,7 +284,7 @@ form {
     animation-range: entry 30% cover 20%;
     font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
-    color:rgb(0, 0, 0);
+    color: $heading-color;
     font-weight: 400; /* Adjust the weight as needed for the heading */
     font-size: 3em; /* Adjust the size as needed for the heading */
     text-align: left;
@@ -264,12 +295,10 @@ form {
 
 }
 .dm-sans-heading3 {
-    animation: unblur linear both;
-    animation-timeline: view();
-    animation-range: entry 30% cover 20%;
+
     font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
-    color:rgb(0, 0, 0);
+    color: $heading-color;
     font-weight: 400; /* Adjust the weight as needed for the heading */
     font-size: 2em; /* Adjust the size as needed for the heading */
     padding: 0px;
@@ -283,12 +312,13 @@ form {
 
 
 .dm-sans-intro {
-    animation: unblur linear both;
+    color: $heading-color;
+    /* animation: unblur linear both;
     animation-timeline: view();
-    animation-range: entry 30% cover 20%;
+    animation-range: entry 30% cover 20%; */
     font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
-    color:rgb(0, 0, 0);
+
     font-weight: 400; /* Adjust the weight as needed for the heading */
     font-size: 3em; /* Adjust the size as needed for the heading */
     padding: 0px;
@@ -305,10 +335,12 @@ form {
 .dm-sans-light {
     font-family: "DM Sans", sans-serif;
     font-optical-sizing: auto;
-    font-weight: 600; /* Adjust the weight as needed for the heading */
-    font-size: 1.5em; /* Adjust the size as needed for the heading */
+    font-weight: 300; /* Adjust the weight as needed for the heading */
+    font-size: 1em; /* Adjust the size as needed for the heading */
+    letter-spacing: 0.2em;
     margin-bottom: 0px;
-    text-align: left;
+    text-align: center;
+    color: $heading-color;
 }
 
 
@@ -319,7 +351,7 @@ form {
     font-size: 1.1em; /* Adjust the size as needed for the heading */
     margin-bottom: 20px;
     text-align: left;
-    color:rgb(51, 51, 51);
+    color: $text-base-color;
     margin-right: 30%;
     line-height: 1.6;
     margin-bottom: 1rem;
@@ -711,6 +743,7 @@ $dot-hover-size: 28px;
         justify-content:flex-start;
         align-items: center; /* Center align items vertically */
         padding: 20px;
+
     
         &__menu {
             position: fixed;
@@ -718,7 +751,7 @@ $dot-hover-size: 28px;
             padding: 20px;
             translate: 150vw 0;
             transition: translate .2s ease;
-            background-color:rgb(255, 255, 255);
+            background: linear-gradient(to left, rgba(0, 0, 0, 1) 20%, rgba(0, 0, 0, 0) 100%);
         }
     
         &__links {
@@ -734,7 +767,10 @@ $dot-hover-size: 28px;
 
     .logo {
         width: 20px; /* Adjust the size of the logo for small screens */
-        padding-bottom: 15px;
+        padding-bottom: 15px;    
+        margin-left: 0%;
+        margin-right: 10px;
+
 
     }
 
