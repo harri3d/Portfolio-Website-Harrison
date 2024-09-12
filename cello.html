@@ -21,7 +21,7 @@
 
 </head>
 <body>
-    <header>
+ <header>
         <span id="nav-label" hidden>Navigation</span>
         <nav class="topnav">
             <!--<img src="images/logo.svg" width=30px class="logo"></img> -->
@@ -46,6 +46,7 @@
                     <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
                     <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
                     <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+                    <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li>
                     <!-- <div class="bottom-item">
                         Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
                         <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
@@ -55,15 +56,15 @@
         </nav>
     </header>
     <div>
-            <h2 class="dm-sans-subheading">Burning Cello</h2>
-            <p class="dm-sans-body">
-                <i>In the abandoned concert hall, dead instruments echo old songs. A spark of life stirs.</i>
-
-                <p class="dm-sans-body" style="color: orangered;">
-                    <i class="fa-solid fa-wrench"></i> = currently working on. Video links are private.
-                </p>
+            <span style="display:block; height: 20px;"></span> 
+            <h2 class="dm-sans-light">BURNING CELLO</h2>
+            <span style="display:block; height: 10px;"></span> 
                 <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/982161353?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Burning_cello_v07"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
             </p>
+            <div class="text-wrapper">
+            <p class="dm-sans-light" style="letter-spacing:0.1em;">
+                <i>In the abandoned concert hall, dead instruments echo old songs. A spark of life stirs.</i>
+
             <div id="lightbox-gallery-root"></div>
 
             <!-- <script type="text/babel">
@@ -165,29 +166,25 @@
 
                 ReactDOM.render(<LightboxGallery />, document.getElementById('lightbox-gallery-root'));
             </script> -->
-            <h3 class="dm-sans-heading3">Concept - Inspiration</h3>
             <p class="dm-sans-body">
-                The idea for this project started with a fire assignment for Dynamics class. I created a procedural animation using Maya expressions and set it to 2CELLOS' classical cover of 'Thunderstruck'. The result was unexpectedly promising, and I started to build more of a story in my head.
+                This project started as a fire assignment for Dynamics 2 class. With the energy of the song, I knew I wanted to build on the concept and create something imaginative and surreal.  
 
                 <img src="images/Cello_Concept.PNG" alt="cello concept" class="portfolio-image" >
 
 
             </p>            
-            <p class="dm-sans-body">
-                Painting in Procreate to explore the mood and colors.
-            </p>    
-            <h3 class="dm-sans-heading3">Procedural Animation with Houdini MotionFX</h3>
-            <p class="dm-sans-body">
-                I knew that Maya wasn't going to cut it if I wanted a fully procedural setup, so I recreated the cello animation in Houdini - now I could layer subtle noise expressions over each other and create an interface to tweak each parameter. 
-            </p>   
-            <h3 class="dm-sans-heading3">Pyro RnD <i class="fa-solid fa-wrench"></i></h3>
 
-            <h3 class="dm-sans-heading3">Pre-viz</h3>
-            <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/982159027?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Burning Cello Previs"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script>
+
+            <!-- <h3 class="dm-sans-heading3">Pre-viz</h3>
+            <div style="padding:56.25% 0 0 0;position:relative;"><iframe src="https://player.vimeo.com/video/982159027?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; clipboard-write" style="position:absolute;top:0;left:0;width:100%;height:100%;" title="Burning Cello Previs"></iframe></div><script src="https://player.vimeo.com/api/player.js"></script> -->
+              <hr>
+              <h3 class="dm-sans-subheading">Project Breakdown</h3>
+
             <h3 class="dm-sans-heading3">Matte Painting Photoshop + Nuke</h3>
             <p class="dm-sans-body">
-                There's something captivating about the eerie atmosphere of abandoned theaters. I knew that I could save a lot of work by using a matte painting, because I only really needed one wide shot to get a sense of the environment. Learning to use projections in Nuke was a challenge. A 3D blockout served as the foundation for my painting. Then I took the render into Photoshop, where I painted layers of detail, decay, and atmosphere.
+                I knew that I could save a lot of work by using a matte painting, because I only really needed one wide shot to get a sense of the environment. A 3D blockout served as the foundation. Then I took the render into Photoshop, where I painted layers of detail, decay, and atmosphere. Finally, I projected the painting back onto the original geometry in Nuke.
             </p>
+          </div>
             <div class="slider-container">
                 <img src="images/matte_v05-02.png" alt="Render" class="slider-image">
 
@@ -272,14 +269,11 @@
                     img.addEventListener('dragstart', (e) => e.preventDefault());
                 });
             </script>
-            <p class="dm-sans-body">
-                By projecting it onto the original geometry in Nuke, I could bring the 2D painting back into 3D space. It doesn't need to be complicated, either. I was pleasantly surprised by how straightforward it was to implement some nice volumetric fog using 3D cards.             
-            </p>
-            <h3 class="dm-sans-heading3">Texturing</h3>
-            <h3 class="dm-sans-heading3">Lighting, Color Grading <i class="fa-solid fa-wrench"></i></h3>
+
+           <!-- <h3 class="dm-sans-heading3">Lighting, Color Grading <i class="fa-solid fa-wrench"></i></h3>
             <p class="dm-sans-body">
                 There was shockingly little dramatically lit cello photography, which necessitated getting creative with reference. A tip if your principal actor is inanimate: you can still use all the portrait lighting tips and techniques, just decide which side of your object is the 'face'.
-            </p>
+            </p> -->
             <span style="display:block; height: 100px;"></span>
 
         </div>
@@ -289,6 +283,7 @@
             </div>
             <span class="lightbox__close">&times;</span>
         </div>
+      
 
 </body>
 <script src="js/script.js"></script>

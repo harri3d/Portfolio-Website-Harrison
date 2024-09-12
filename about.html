@@ -23,15 +23,12 @@
 
 
 
-        p {
-            line-height: 1.6;
-            margin-bottom: 1rem;
-        }
 
         .highlight {
             position: relative;
             display: inline-block;
-            color: #FF4500;
+            color: #FFBF80;
+            font-weight: 300;
             transition: color 0.3s ease;
         }
 
@@ -42,7 +39,7 @@
             left: 0;
             width: 100%;
             height: 2px;
-            background-color: #FF4500;
+            background-color: #FFBF80;
             transform: scaleX(0);
             transition: transform 0.3s ease;
         }
@@ -53,7 +50,7 @@
 
         .particle {
             position: absolute;
-            background-color: #FF4500;
+            background-color: #FFBF80;
             border-radius: 50%;
             pointer-events: none;
             opacity: 0;
@@ -138,7 +135,7 @@
     </style>
 
 <body>
-    <header>
+ <header>
         <span id="nav-label" hidden>Navigation</span>
         <nav class="topnav">
             <!--<img src="images/logo.svg" width=30px class="logo"></img> -->
@@ -163,6 +160,7 @@
                     <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
                     <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
                     <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+                    <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li>
                     <!-- <div class="bottom-item">
                         Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
                         <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
@@ -180,15 +178,15 @@
         </div>
         <div class="text-column">
             <h2 class="dm-sans-subheading">About Me - Hi!</h2>
-            <p style=" font-size: larger;" >
-                Based in Los Angeles | Studying at Gnomon School of Visual Effects | Graduating Summer 2025
-            </p>
-            <p>I'm drawn to VFX because it's the <span class="highlight">mad science of the art world</span>. Programming, visual design, physical simulation, a grab bag of fascinating topics. There's the power to slightly change one parameter and redefine the laws of physics, watching your experiment unfold like some sort of Rube Goldberg machine. How could <em>that</em> ever get boring?</p>
-            <p>I have a background in traditional drawing and painting and it has a clear influence on the rest of my work. I use a limited palette of colors and shapes, always working from simple to complex, maintaining a hierarchy of values and detail. I try to avoid the 'visual noise' that's all too easy to create with 3D.</p>
-            <p>I draw inspiration from <span class="highlight">surreal and fantasy art and animation</span>. I like things that aren't afraid to be weird. Beyond my professional interests, I enjoy exploring LA's nature trails and photography, which provides me with better ideas.</p>
-            <p>Currently I'm working on a few short animations to hone my skills and prepare a demo reel. You can check out the WIP projects and breakdown pages in the sidebar. I am a straightforward and down-to-earth person. I'm deeply fascinated by all the things I don't understand. I hope that this website can somewhat reflect how I'm like. Not by using some generic Squarespace template.</p>
-            <p>Thank you for taking the time to learn a little bit about me! Feel free to get in touch, I'm looking forward to hearing from you.</p>
-            <p>- Harrison</p>
+            <p class="dm-sans-heading3" >
+                Based in Los Angeles * Studying at Gnomon School of Visual Effects   *   Graduating Summer 2025
+            </p >
+            <p class="dm-sans-body">I'm drawn to VFX because it's like the <span class="highlight">mad science of the art world.</span> There's the power to slightly change one parameter and redefine the laws of physics, watching your experiment unfold like some sort of Rube Goldberg machine. How could <em>that</em> ever get boring?</p>
+            <p class="dm-sans-body">I have a background in traditional drawing and painting, and an AS in Graphic Design. Design principles are really handy when it comes to art directing chaotic simulations.</p>
+            <p class="dm-sans-body">I get super inspired from <span class="highlight">surreal and fantasy art and animation</span>. I like things that aren't afraid to be weird. Beyond my professional interests, I enjoy exploring LA's nature trails and photography, which provides me with better ideas.</p>
+            <!-- <p class="dm-sans-body">Currently I'm working on a few short animations to hone my skills and prepare a demo reel. You can check out the WIP projects and breakdown pages in the sidebar. I am a straightforward and down-to-earth person. I'm deeply fascinated by all the things I don't understand. I hope that this website can somewhat reflect how I'm like. Not by using some generic Squarespace template.</p> -->
+            <p class="dm-sans-body">Thank you for taking the time to learn a little bit about me! Feel free to get in touch, I'm looking forward to hearing from you.</p>
+            <p class="dm-sans-body">- Harrison</p>
 
         </div>
         
@@ -231,75 +229,7 @@
         });
     </script>
     <script src="js/script.js"></script>
-    <script>
-        const glassCard = document.querySelector('.glass-card');
-        const highlight = document.querySelector('.highlight-card');
 
-        function applyTransform(rotateX, rotateY) {
-            const translateX = glassCard.matches(':hover') ? 5 : 0;
-            const scale = glassCard.matches(':hover') ? 1.01 : 1;
-            glassCard.style.transform = `translateX(${translateX}px) scale(${scale}) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-        }
-
-        function calculateRotation(x, y, width, height) {
-            const centerX = width / 2;
-            const centerY = height / 2;
-            const rotateY = (x - centerX) / 200;
-            const rotateX = (centerY - y) / 500;
-            return { rotateX, rotateY };
-        }
-
-        function handleMouseMove(e) {
-            const { left, top, width, height } = glassCard.getBoundingClientRect();
-            const x = e.clientX - left;
-            const y = e.clientY - top;
-
-            const { rotateX, rotateY } = calculateRotation(x, y, width, height);
-            applyTransform(rotateX, rotateY);
-
-            highlight.style.setProperty('--x', `${x}px`);
-            highlight.style.setProperty('--y', `${y}px`);
-            highlight.style.opacity = '1'; // Show highlight
-        }
-
-        function handleMouseLeave() {
-            resetCardPosition();
-            highlight.style.opacity = '0'; // Hide highlight
-        }
-
-        function resetCardPosition() {
-            applyTransform(0, 0);
-        }
-
-        function handleTouch(e) {
-            e.preventDefault();
-            const touch = e.touches[0];
-            const { left, top, width, height } = glassCard.getBoundingClientRect();
-            const x = touch.clientX - left;
-            const y = touch.clientY - top;
-
-            const { rotateX, rotateY } = calculateRotation(x, y, width, height);
-            applyTransform(rotateX, rotateY);
-
-            highlight.style.setProperty('--x', `${x}px`);
-            highlight.style.setProperty('--y', `${y}px`);
-            highlight.style.opacity = '1'; // Show highlight
-
-            // Set a timeout to reset the position and hide highlight after a short delay
-            setTimeout(() => {
-                resetCardPosition();
-                highlight.style.opacity = '0'; // Hide highlight
-            }, 500);
-        }
-
-        glassCard.addEventListener('mousemove', handleMouseMove);
-        glassCard.addEventListener('mouseleave', handleMouseLeave);
-        glassCard.addEventListener('touchstart', handleTouch);
-        glassCard.addEventListener('touchmove', handleTouch);
-
-        // Remove transform on window resize to prevent issues
-        window.addEventListener('resize', resetCardPosition);
-    </script>
 
 
     </body>

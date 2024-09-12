@@ -14,7 +14,7 @@
     <script src="lightbox.js"></script>
 </head>
 <body>
-    <header>
+ <header>
         <span id="nav-label" hidden>Navigation</span>
         <nav class="topnav">
             <!--<img src="images/logo.svg" width=30px class="logo"></img> -->
@@ -39,6 +39,7 @@
                     <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
                     <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
                     <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+                    <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li>
                     <!-- <div class="bottom-item">
                         Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
                         <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
@@ -49,36 +50,40 @@
     </header>
     <section>
 
-            <h2 class="dm-sans-subheading">Cannon-Bomb</h2>
+            <span style="display:block; height: 20px;"></span> 
+            <h2 class="dm-sans-light">CANNON-BOMB</h2>
+            <span style="display:block; height: 10px;"></span> 
+      <div>
+        <img src="https://placehold.co/1900x1000/png?text=Ill+get+to+this+project+eventually+lol" alt="Image 1" loading="lazy" class="portfolio-image">
+      </div>
+          <div class="text-wrapper">
             <p class="dm-sans-body">
-                It's a cannonball, it's a bomb. Need I say more?
+                For Dynamics 4 I wanted to make an homage to classic cartoon violence, and design some stylized explosion goodness.
             </p>
-            <p class="dm-sans-body" style="color: orangered;">
-                <i class="fa-solid fa-wrench"></i> = currently working on
-            </p>
+            <h3 class="dm-sans-heading3">Concept Sketches</i></h3>
+            <div class="gallery-container">
+                <img src="images/sketch01.jpg" alt="Digital nature artwork" class="gallery-item">
+                <img src="images/sketch02.jpg" alt="Digital nature artwork" class="gallery-item">
+            </div>
+            <hr>
             <h2 class="dm-sans-subheading">Project Breakdown</h2>
+
+            <h3 class="dm-sans-heading3">Cheating a Shockwave</h3>
             <p class="dm-sans-body">
-                The inspiration is classic cartoon violence, an opportunity to make something funny and surprising and pirate-themed. I decide to exaggerate a few elements but otherwise stick to realism.
-            </p>
-            
-            <h3 class="dm-sans-heading3">'Cheating' at Shockwaves</h3>
-            <p class="dm-sans-body">
-                The shockwave was a fun puzzle to solve. How could I explode all those little coins and splinters? 
+                The shockwave was a fun puzzle to solve. How could I animate all those little coins and splinters? 
             </p>
 
             <p class="dm-sans-body">
-                At first, I thought explosion simulations must use things like air pressure. However, I realized there's usually no need. Simply giving each piece its own random velocity and activating them with a growing sphere makes them jump away from the center on their own! They're very obedient wood splinters.
+                At first, I thought to make a convincing explosion, I would have to simulate air pressure and all sorts of real-world complexities. However, there's actually no need to do all that when you have the magic of Houdini! A random velocity attribute and activating  with a growing sphere makes each piece of debris jump away from the center in an explody fashion - it helps to have very obedient wood splinters.
             </p>
             <img class="portfolio-image-small"src="images/problem_constraints_with_pointdeform.gif"></img>
-            <div class="vex-container" id="vex-container">
+            <!-- <div class="vex-container" id="vex-container">
                 <div class="vex-header">VEXpression</div>
                 <div id="code-container"></div>
                 <button id="copy-button" class="copy-button">Copy</button>
-            </div>
-            <p class="dm-sans-body">
-                This is part of what I love about Houdini. The "physically accurate" method is not always the best approach. The sim would be hard to control and painfully slow if I were to use air pressure. But with a few lines of VEX, I can "cheat" and have much more precise control, a faster sim, and all the little pieces acting on cue.
-            </p>
-            <h3 class="dm-sans-heading3">Explosion Pyro RnD <i class="fa-solid fa-wrench"></i></h3>
+            </div> -->
+
+            <!-- <h3 class="dm-sans-heading3">Explosion Pyro RnD <i class="fa-solid fa-wrench"></i></h3> -->
 
             <!-- <h3 class="dm-sans-heading3">Progress  <i class="fa-solid fa-wrench"></i></h3>
             <div class="gallery-container">
@@ -89,14 +94,10 @@
             </div> -->
             <p class="dm-sans-body">
             </p>
-            <h3 class="dm-sans-heading3">Concept Sketches</i></h3>
-            <div class="gallery-container">
-                <img src="images/sketch01.jpg" alt="Digital nature artwork" class="gallery-item">
-                <img src="images/sketch02.jpg" alt="Digital nature artwork" class="gallery-item">
-            </div>
+            
             <span style="display:block; height: 100px;"></span>
     </section>
-
+  </div>
     <div class="lightbox">
         <div class="lightbox__content">
             <img src="" alt="Lightbox Image">
@@ -104,11 +105,12 @@
         <span class="lightbox__close">&times;</span>
     </div>
 
+
 </body>
 <script src="js/script.js"></script>
 <script src="js/lightbox.js"></script>
 
 
-<script src="js/vex_typewriter.js"></script>
+<!-- <script src="js/vex_typewriter.js"></script>-->
 
 </html>

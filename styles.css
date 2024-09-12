@@ -31,12 +31,16 @@
   justify-content: center;
 }
 
+.text-wrapper {
+  margin-left: 25%;
+  margin-right: 25%;
+}
+
 body, html {
   height: 100%;
 }
 
 section {
-  overflow-x: hidden;
   animation: transitionIn 0.75s;
 }
 
@@ -63,11 +67,12 @@ body {
   /* Changed from center to flex-start to align items from the top */
   padding-left: 270px;
   padding-right: 150px;
-  font-weight: 300;
+  font-weight: 200;
   /* Adjust the weight as needed for the heading */
   font-size: 1em;
   /* Adjust the size as needed for the heading */
 }
+
 @media (max-width: 80em) {
   body {
     justify-content: center;
@@ -78,7 +83,6 @@ body {
     padding-top: 40px;
   }
 }
-
 a {
   text-decoration: none;
   color: #ff895f;
@@ -138,12 +142,12 @@ form {
   margin-left: 200px;
   overflow: hidden;
 }
+
 @media (max-width: 1500px) {
   .container {
     margin-left: 1rem;
   }
 }
-
 .bottom-item {
   border-radius: 5px;
   border: #333;
@@ -176,6 +180,7 @@ form {
   padding-top: 10%;
   z-index: 10;
 }
+
 .topnav button {
   position: fixed;
   right: 20px;
@@ -184,6 +189,7 @@ form {
   padding: 0px;
   margin-inline-start: auto;
 }
+
 @media (width >= 80em) {
   .topnav button {
     display: none;
@@ -192,6 +198,7 @@ form {
 .topnav__open[aria-expanded=true] + .topnav__menu {
   translate: 0;
 }
+
 .topnav__links {
   display: flex;
   gap: 0.2rem;
@@ -206,6 +213,7 @@ form {
   font-size: 1.2em;
   /* Adjust the size as needed for the heading */
 }
+
 .topnav__link {
   text-decoration: none;
   /* Remove underline */
@@ -214,11 +222,13 @@ form {
   transition: color 0.03s ease-in-out;
   /* Smooth transition for hover effect */
 }
+
 .topnav__item {
   list-style-type: none;
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
 }
+
 .topnav__menu {
   padding-top: 20px;
 }
@@ -230,7 +240,7 @@ form {
   height: auto;
   margin-top: 20px;
   margin-right: 0px;
-  margin-left: 70%;
+  margin-left: 150px;
   text-align: right;
 }
 
@@ -263,35 +273,32 @@ form {
 }
 
 .dm-sans-subheading {
-  animation: unblur linear both;
-  animation-timeline: view();
-  animation-range: entry 30% cover 20%;
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
   color: #FFFFFF;
-  font-weight: 400;
+  font-weight: 600;
   /* Adjust the weight as needed for the heading */
-  font-size: 3em;
+  font-size: 3.5em;
   /* Adjust the size as needed for the heading */
   text-align: left;
   line-height: 1.1;
-  margin-top: 20px;
-  margin-bottom: 0px;
+  margin-top: 2.5rem;
+  margin-bottom: 1rem;
 }
 
 .dm-sans-heading3 {
   font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
   color: #FFFFFF;
-  font-weight: 400;
+  font-weight: 300;
   /* Adjust the weight as needed for the heading */
   font-size: 2em;
   /* Adjust the size as needed for the heading */
   padding: 0px;
   text-align: left;
   line-height: 1.1;
-  margin-top: 50px;
-  margin-bottom: 1rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
 }
 
 .dm-sans-intro {
@@ -330,14 +337,10 @@ form {
   font-optical-sizing: auto;
   font-weight: 300;
   /* Adjust the weight as needed for the heading */
-  font-size: 1.1em;
+  font-size: 1.2rem;
   /* Adjust the size as needed for the heading */
-  margin-bottom: 20px;
   text-align: left;
   color: #FFFFFF;
-  margin-right: 30%;
-  line-height: 1.6;
-  margin-bottom: 1rem;
 }
 
 .dm-sans-tagline {
@@ -407,20 +410,24 @@ form {
   height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
 }
+
 .lightbox.active {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .lightbox__content {
   width: 90%;
   height: auto;
 }
+
 .lightbox__content img {
   width: 100%;
   height: auto;
   object-fit: contain;
 }
+
 .lightbox__close {
   position: absolute;
   top: 20px;
@@ -434,6 +441,7 @@ form {
   cursor: pointer;
   transition: opacity 0.1s ease;
 }
+
 .portfolio-image:hover, .portfolio-image-small:hover {
   opacity: 0.9;
 }
@@ -471,12 +479,14 @@ form {
   flex-wrap: wrap;
   margin: -5px;
 }
+
 .gallery-container .gallery-item {
   flex: 1 1 calc(25% - 10px);
   margin: 5px;
   min-width: calc(25% - 10px);
   height: auto;
 }
+
 .gallery-container .gallery-item img {
   width: 100%;
   height: auto;
@@ -569,6 +579,7 @@ form {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
+
 .copy-button:hover {
   background-color: #5a5a5a;
 }
@@ -598,6 +609,7 @@ form {
   transition: box-shadow 0.3s ease;
   -webkit-tap-highlight-color: transparent;
 }
+
 .slider-container:hover {
   box-shadow: 0 15px 40px rgba(0, 0, 0, 0.199);
 }
@@ -616,6 +628,7 @@ form {
   width: 50%;
   overflow: hidden;
 }
+
 .slider-image-overlay .slider-image {
   position: absolute;
   top: 0;
@@ -635,6 +648,7 @@ form {
   cursor: ew-resize;
   transition: background 0.3s ease;
 }
+
 .slider-handle::after {
   content: "";
   position: absolute;
@@ -648,11 +662,13 @@ form {
   box-shadow: 0 0 10px rgba(255, 69, 0, 0.5);
   transition: all 0.3s ease;
 }
+
 .slider-handle:hover::after {
   width: 28px;
   height: 28px;
   box-shadow: 0 0 15px rgba(255, 69, 0, 0.7);
 }
+
 .slider-handle::before {
   content: "↔";
   position: absolute;
@@ -676,9 +692,11 @@ form {
   border-radius: 5px;
   transition: opacity 0.3s ease;
 }
+
 .slider-label.before {
   left: 20px;
 }
+
 .slider-label.after {
   right: 20px;
 }
@@ -701,6 +719,7 @@ form {
     /* Center align items vertically */
     padding: 20px;
   }
+
   .topnav__menu {
     position: fixed;
     inset: 0px;
@@ -709,6 +728,7 @@ form {
     transition: translate 0.2s ease;
     background: linear-gradient(to left, black 20%, rgba(0, 0, 0, 0) 100%);
   }
+
   .topnav__links {
     flex-direction: column;
     padding: 10%;
@@ -745,7 +765,7 @@ form {
   }
 
   .dm-sans-heading3 {
-    font-size: 2em;
+    font-size: 1.5em;
     /* Adjust the size for small screens */
     margin-left: 10px;
     margin-right: 10px;
@@ -764,7 +784,7 @@ form {
   }
 
   .dm-sans-body {
-    font-size: 1.2em;
+    font-size: 1em;
     /* Adjust the size for small screens */
     margin-right: 0%;
     margin-left: 10px;
@@ -796,6 +816,11 @@ form {
 
   .goodfornothing-image {
     display: none;
+  }
+
+  .text-wrapper {
+    margin-left: 0px;
+    margin-right: 0px;
   }
 }
 @media (max-width: 500px) {
