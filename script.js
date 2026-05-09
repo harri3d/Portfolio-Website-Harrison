@@ -1,33 +1,31 @@
-const btnOpen = document.querySelector('#btnOpen');
-const btnClose = document.querySelector('#btnClose');
-const topnav__menu = document.querySelector('.topnav__menu');
-const media = window.matchMedia('(width < 40em)');
-const body = document.querySelector('body');
+document.addEventListener('DOMContentLoaded', () => {
+  const btnOpen = document.querySelector('.topnav__open');
+  const btnClose = document.querySelector('.topnav__close');
+  const menu = document.querySelector('.topnav__menu');
 
-function setuptopnav() {
-    topnav__menu.style.transition = 'none';
-}
+  console.log({ btnOpen, btnClose, menu }); // ← add this to verify all 3 are found
 
-function openMobileMenu() {
-    topnav__menu.removeAttribute('style');
+  btnOpen.addEventListener('click', () => {
+    menu.classList.add('is-open');
     btnOpen.setAttribute('aria-expanded', 'true');
-    bodyScrollLockUpgrade.disableBodyScroll(body);
-    btnClose.focus();
+  });
 
-}
-
-function closeMobileMenu() {
+  btnClose.addEventListener('click', () => {
+    menu.classList.remove('is-open');
     btnOpen.setAttribute('aria-expanded', 'false');
-    console.log("button clicked")
-    bodyScrollLockUpgrade.enableBodyScroll(body);
-    btnOpen.focus();
+  });
 
-    setTimeout(() => {
-        topnav__menu.style.transition = 'none';
-    }, 500)
+  document.querySelectorAll('.topnav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      btnOpen.setAttribute('aria-expanded', 'false');
+    });
+  });
 
-}
-
-setuptopnav();
-btnOpen.addEventListener('click', openMobileMenu);
-btnClose.addEventListener('click', closeMobileMenu);
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      menu.classList.remove('is-open');
+      btnOpen.setAttribute('aria-expanded', 'false');
+    }
+  });
+});

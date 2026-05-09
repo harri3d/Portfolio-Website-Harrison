@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Harrison Dorn VFX</title>
-    <link rel="shortcut icon" type="image/svg" href="images/favicon.svg"/>
+    <link rel="shortcut icon" type="image/svg" href="images/favicon.png"/>
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
@@ -61,56 +61,61 @@
                 grid-template-columns: 1fr;
             }
         }
-        .glass-card {
-            position: relative;
-            margin-top:30%;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            overflow: hidden;
-            box-shadow: 
-                0 8px 32px 0 rgba(31, 38, 135, 0.144);
-            transition: transform 0.1s ease;
-            transform-style: preserve-3d;
-                    /* Adjust the media query to target tablets */
-            @media (max-width: 1024px) and (min-width: 769px) {
-                .glass-card {
-                    transition: transform 0.3s ease;
+.glass-card {
+    position: relative;
+    margin-top: 30%;
+    margin-left: 20%;
 
-                }
-            }
+    @media (max-width: 768px) {
+        margin-top: 50px;
+    }
+}
 
-            /* Mobile styles remain the same */
-            @media (max-width: 768px) {
-                /* ... previous mobile styles ... */
-                margin-top:0px;
+.glass-card img {
+    width: auto;
+    height: 300px;
+    display: block;
+    border-radius: 50%;
+    position: relative;
+    z-index: 1;
 
-            }
-        }
+    @media (max-width: 768px) {
+        display: none;
+    }
+}
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: -5px;
-            left: -5px;
-            right: -5px;
-            bottom: -5px;
-            background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0.5));
-            z-index: -1;
-            filter: blur(20px);
-        }
-        
+.glass-card::before,
+.glass-card::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    background-color: #6b7cd5;
+    z-index: 0;
+}
 
-        .glass-card img {
-            width: 100%;
-            height: auto;
-            display: block;
-            transform: translateZ(20px);
-            transition: transform 0.3s ease-out;
+.glass-card::before {
+    width: 150px;
+    height: 150px;
+    top: -20px;
+    left: -10px;
+    opacity: 1;
+}
 
-        }
-        .glass-card:hover img {
-            transform: scale(1.03); /* Additional scale for the image */
-        }
+.glass-card::after {
+    width: 20px;
+    height: 20px;
+    bottom: 30px;
+    right: 30px;
+    opacity: 1;
+}
+
+/* Hide circles on mobile */
+@media (max-width: 80em) {
+    .glass-card::before,
+    .glass-card::after {
+        display: none;
+    }
+}
 
 
         .highlight-card {
@@ -137,61 +142,78 @@
 <body>
  <header>
         <span id="nav-label" hidden>Navigation</span>
-        <nav class="topnav">
-            <!--<img src="images/logo.svg" width=30px class="logo"></img> -->
-            <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
-                <img src="https://raw.githubusercontent.com/harri3d/Portfolio-Website-Harrison/8bf8d488a439a78c5cde4038d8541cf39c7cdaec/images/logo.svg" class="logo">
-            </a>
-            <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
-                <h1 class="dm-sans-name">HARRISON DORN</h1>
-            </a>
-            <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
-                <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
-            </button>
+   <nav class="topnav">
+    <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+        <img src="https://raw.githubusercontent.com/harri3d/Portfolio-Website-Harrison/8bf8d488a439a78c5cde4038d8541cf39c7cdaec/images/logo.svg" class="logo">
+    </a>
+    <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+        <h1 class="dm-sans-name">harrison dorn</h1>
+        <h3 class="dm-sans-subtitle">FX ARTIST | 3D GENERALIST</h3>
+    </a>
 
-            <nav class="topnav__menu" role="dialog" aria-labelledby="nav-label" id="topnavMenu">
-                <button id="btnClose" class="topnav__close" aria-label="Close">
-                    <i class="fa-solid fa-x fa-2xl" style="color: #ffffff;"></i>
-                </button>
-                <ul class="topnav__links">
-                    <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
-                    <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
-                    <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
-                     <!-- <h3 class="dm-sans-light">PROJECTS</h3> -->
-                    <div>
-                      <hr/>
-                    </div>
-                    <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
-                    <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
-                    <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
-                    <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li>
-                    <!-- <div class="bottom-item">
-                        Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
-                        <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
-                    </div> -->
-                </ul>
-            </nav>
-        </nav>
+    <!-- Desktop links -->
+    <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link">Home</a></li>
+        <li class="topnav__item"></span><a href="gallery.html" class="topnav__link">Gallery</a></li>
+        <li class="topnav__item"></span><a href="about.html" class="topnav__link"><span style="color:white">About</span></a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+
+        <div><hr/></div>
+        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+    </ul>
+
+    <!-- Mobile hamburger button -->
+    <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
+        <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
+    </button>
+</nav>
+
+<!-- Mobile-only overlay menu -->
+<nav class="topnav__menu" role="dialog" aria-labelledby="nav-label" id="topnavMenu">
+    <button id="btnClose" class="topnav__close" aria-label="Close">
+        <i class="fa-solid fa-x fa-2xl" style="color: #ffffff;"></i>
+    </button>
+    <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link">Home</a></li>
+                                <li class="topnav__item"></span><a href="gallery.html" class="topnav__link">Gallery</a></li>
+
+        <li class="topnav__item"><a href="about.html" class="topnav__link"><span style="color:white">About</span></a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+        <div><hr/></div>
+        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+    </ul>
+</nav>
     </header>
-    <div class="container" >
+    <div class="container">
         <div class="image-column" style="justify-content: center">
             <div class="glass-card">
-                <img src="images/portrait.png" alt="Placeholder portrait image">
+                <img src="images/profile-pic-white-cropped.png" alt="Placeholder portrait image">
                 <div class="highlight-card"></div>
             </div>
         </div>
         <div class="text-column">
-            <h2 class="dm-sans-subheading">About Me - Hi!</h2>
-            <p class="dm-sans-heading3" >
-                Based in Los Angeles * Studying at Gnomon School of Visual Effects   *   Graduating Summer 2025
-            </p >
-            <p class="dm-sans-body">I'm drawn to VFX because it's like the <span class="highlight">mad science of the art world.</span> There's the power to slightly change one parameter and redefine the laws of physics, watching your experiment unfold like some sort of Rube Goldberg machine. How could <em>that</em> ever get boring?</p>
+            <!-- <h2 class="dm-sans-subtitle">the man the myth the legend</h2> -->
+                        <h2 class="dm-sans-subheading" style="z-index:10"><span style="color: orangered;">about</span> harrison</h2>
+
+
+<!--            <p class="dm-sans-body">I'm drawn to VFX because it's like the <span class="highlight">mad science of the art world.</span> There's the power to slightly change one parameter and redefine the laws of physics, watching your experiment unfold like some sort of Rube Goldberg machine. How could <em>that</em> ever get boring?</p>
             <p class="dm-sans-body">I have a background in traditional drawing and painting, and an AS in Graphic Design. Design principles are really handy when it comes to art directing chaotic simulations.</p>
             <p class="dm-sans-body">I get super inspired from <span class="highlight">surreal and fantasy art and animation</span>. I like things that aren't afraid to be weird. Beyond my professional interests, I enjoy exploring LA's nature trails and photography, which provides me with better ideas.</p>
-            <!-- <p class="dm-sans-body">Currently I'm working on a few short animations to hone my skills and prepare a demo reel. You can check out the WIP projects and breakdown pages in the sidebar. I am a straightforward and down-to-earth person. I'm deeply fascinated by all the things I don't understand. I hope that this website can somewhat reflect how I'm like. Not by using some generic Squarespace template.</p> -->
-            <p class="dm-sans-body">Thank you for taking the time to learn a little bit about me! Feel free to get in touch, I'm looking forward to hearing from you.</p>
-            <p class="dm-sans-body">- Harrison</p>
+             <p class="dm-sans-body">Currently I'm working on a few short animations to hone my skills and prepare a demo reel. You can check out the WIP projects and breakdown pages in the sidebar. I am a straightforward and down-to-earth person. I'm deeply fascinated by all the things I don't understand. I hope that this website can somewhat reflect how I'm like. Not by using some generic Squarespace template.</p> 
+  -->          
+<p class="dm-sans-body">Little is known about this mysterious individual. Rumors circulate that he graduated from <span class="dm-sans-subtitle" style="color: orange;">GNOMON SCHOOL OF VISUAL EFFECTS</span> with a concentration in <span class="dm-sans-subtitle" style="color: orange;">SIMULATION ART</span>.</p>
 
+<p class="dm-sans-body">Experts confirm he possesses an uncontrollable compulsion to make <span class="dm-sans-subtitle" style="color: orange;">THINGS THAT DON'T EXIST</span> appear like they do. Symptoms include staring at <span class="dm-sans-subtitle" style="color: orange;">WATER</span> for too long, narrating the physics of things that are on <span class="dm-sans-subtitle" style="color: orange;">FIRE</span>, and knowing more about <span class="dm-sans-subtitle" style="color: orange;">LIGHT REFRACTION</span> than is reasonable.</p>
+<p class="dm-sans-body">Unverified sources suggest he comes bearing a background in <span class="dm-sans-subtitle" style="color: orange;">TRADITIONAL DRAWING</span> and <span class="dm-sans-subtitle" style="color: orange;">PAINTING</span>, and draws inspiration from <span class="dm-sans-subtitle" style="color: orange;">SURREAL</span> and <span class="dm-sans-subtitle" style="color: orange;">FANTASY ART</span>.</p>
+<p class="dm-sans-body">In his natural habitat — the trails of <span class="dm-sans-subtitle" style="color: orange;">HUMBOLDT COUNTY</span> — he has been spotted carrying a <span class="dm-sans-subtitle" style="color: orange;">CAMERA</span> and quietly collecting better ideas than the ones he arrived with. Whether this is a creative practice or simply a complicated excuse to go outside remains under investigation.</p>
+
+<!-- <p class="dm-sans-body">He did not use a <span class="dm-sans-subtitle" style="color: orange;">SQUARESPACE TEMPLATE</span>. This much is certain.</p> -->
         </div>
         
 

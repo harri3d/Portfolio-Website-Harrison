@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Harrison Dorn VFX</title>
-    <link rel="shortcut icon" type="image/svg" href="images/favicon.svg"/>
+    <link rel="shortcut icon" type="image/svg" href="images/favicon.png"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="styles.css">
@@ -13,7 +13,12 @@
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
     <script src="js/lightbox.js"></script>
 
+     
+<script src="js/script.js"></script>
+
     <style>
+
+
         .lightbox-overlay {
             position: fixed;
             top: 0;
@@ -156,56 +161,86 @@
 <body>
  <header>
         <span id="nav-label" hidden>Navigation</span>
-        <nav class="topnav">
-            <!--<img src="images/logo.svg" width=30px class="logo"></img> -->
-            <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
-                <img src="https://raw.githubusercontent.com/harri3d/Portfolio-Website-Harrison/8bf8d488a439a78c5cde4038d8541cf39c7cdaec/images/logo.svg" class="logo">
-            </a>
-            <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
-                <h1 class="dm-sans-name">HARRISON DORN</h1>
-            </a>
+        
 
-            <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
-                <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
-            </button>
 
-            <nav class="topnav__menu" role="dialog" aria-labelledby="nav-label" id="topnavMenu">
-                <button id="btnClose" class="topnav__close" aria-label="Close">
-                    <i class="fa-solid fa-x fa-2xl" style="color: #ffffff;"></i>
-                </button>
-                <ul class="topnav__links">
-                    <li class="topnav__item"><a href="index.html" class="topnav__link"> Home</a></li>
-                    <li class="topnav__item"><a href="about.html" class="topnav__link"></i> About</a></li>
-                    <li class="topnav__item"><a href="contact.html" class="topnav__link"></i> Contact</a></li>
-                     <!-- <h3 class="dm-sans-light">PROJECTS</h3> -->
-                    <div>
-                      <hr/>
-                    </div>
-                    <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
-                    <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
-                    <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
-                    <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li>
-                    <!-- <div class="bottom-item">
-                        Made with <i class="fa-solid fa-heart"></i> and html/css/javascript. My portfolio website is
-                        <a href="https://github.com/harri3d/Portfolio-Website-Harrison" target="_blank">open source</a>
-                    </div> -->
-                </ul>
-            </nav>
-        </nav>
+   <nav class="topnav">
+    <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+        <img src="https://raw.githubusercontent.com/harri3d/Portfolio-Website-Harrison/8bf8d488a439a78c5cde4038d8541cf39c7cdaec/images/logo.svg" class="logo">
+    </a>
+    <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+        <h1 class="dm-sans-name">harrison dorn</h1>
+        <h3 class="dm-sans-subtitle">FX ARTIST | 3D GENERALIST</h3>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link"><span style="color:white">Home</span></a></li>
+                        <li class="topnav__item"></span><a href="gallery.html" class="topnav__link">Gallery</a></li>
+
+        <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+
+        <div><hr/></div>
+        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+    </ul>
+
+    <!-- Mobile hamburger button -->
+    <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
+        <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
+    </button>
+</nav>
+
+<!-- Mobile-only overlay menu -->
+<nav class="topnav__menu" role="dialog" aria-labelledby="nav-label" id="topnavMenu">
+    <button id="btnClose" class="topnav__close" aria-label="Close">
+        <i class="fa-solid fa-x fa-2xl" style="color: #ffffff;"></i>
+    </button>
+    <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link"><span style="color:white">Home</span></a></li>
+                                <li class="topnav__item"></span><a href="gallery.html" class="topnav__link">Gallery</a></li>
+
+        <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+        <div><hr/></div>
+        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+    </ul>
+</nav>
     </header>
-    <div>
-
-             <span style="display:block; height: 20px;"></span> 
+    <div style="animation: fadeUp var(--duration-slow) var(--ease-out) both;">
+        <span class="mobile-gap"></span>
             <h3 class="dm-sans-light" style="margin-left:0px;">REEL 2024</h3>
 
-            <div class="wrapper">
+
+<div class="hero-video">
+  <img
+    class="video-poster"
+    src="images/thumb.jpg"
+    alt=""
+  />
+
+              <div class="wrapper">
                     <!-- <img src="images/fireComp_test01.gif" alt="Simulation or destruction effect example" class="portfolio-image"> -->
                     <iframe src="https://player.vimeo.com/video/982161353?title=0&amp;byline=0&amp;portrait=0&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" frameborder="0" width="100%" height="700"  allow="autoplay; fullscreen; picture-in-picture; clipboard-write" title="Burning Cello"></iframe>
 
             </div>
-            <h3 class="dm-sans-intro">
+</div>
+
+
+
+
+
+            <!-- <h3 class="dm-sans-intro">
                 Welcome! I'm an FX Artist and 3D generalist. I conjure digital mayhem through effects and simulations.
-            </h3>
+            </h3> -->
+
+
             <!--
             <div>
                 <div class="card-content">
@@ -228,14 +263,14 @@
 
             
 
-
+<!-- 
             <div class="lightbox">
                 <div class="lightbox__content">
                     <img src="" alt="Lightbox Image">
                 </div>
                 <span class="lightbox__close">&times;</span>
               </div>
-            <!-- Featured Projects -->
+        
                 <h3 class="dm-sans-light" style="margin-left:0px;">PROJECTS</h3>
                 <hr>
                 <div class="projects-grid">
@@ -252,7 +287,7 @@
                     <img src="https://placehold.co/600x400/png?text=Uzumaki+Project" alt="Uzumaki Project" class="project-image">
                     <div class="project-overlay"></div>
                   </a>
-                </div>
+                </div> -->
 
 
             <!-- About Me Preview -->
@@ -269,7 +304,7 @@
                     </div>
                 </div>
             </section>
-            <p class="dm-sans-body" style="color: orangered;">
+            <p class="dm-sans-body" style="color: white;">
                 <i class="fa-solid fa-wrench"></i> This site is under construction, video links are private. There's not a demo reel here yet. However, you can check out some WIPs in the Projects sidebar. I'm keeping track of my progress here in the meantime :) 
             </p>
         -->
@@ -277,17 +312,27 @@
 
         
 
-            <span style="display:block; height: 50px;"></span>
 
 
 
 
     </div>
+    <script src="https://player.vimeo.com/api/player.js"></script>
+
+    <script>
+  const iframe = document.querySelector(".hero-video iframe");
+  const container = document.querySelector(".hero-video");
+
+  const player = new Vimeo.Player(iframe);
+
+  player.ready().then(() => {
+    container.classList.add("loaded");
+  });
+</script>
        
     
 </body>
-<script src="js/script.js"></script>
-<script>
+<!-- <script>
         const container = document.querySelector('.container');
         const cards = document.querySelectorAll('.card');
         let lastScrollTop = container.scrollTop;
@@ -348,6 +393,6 @@
                 ticking = true;
             }
         }, { passive: true });
-</script>
+</script> -->
 
 </html>

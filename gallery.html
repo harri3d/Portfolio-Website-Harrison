@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison Dorn VFX</title>
+    <link rel="shortcut icon" type="image/svg" href="images/favicon.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
+    <script src="js/lightbox.js"></script>
+
+     
+<script src="js/script.js"></script>
+<style>
+ /* ── Grid ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 3px;
+      padding: 3px;
+    }
+ 
+    @media (max-width: 1100px) { .grid { grid-template-columns: repeat(3, 1fr); } }
+    @media (max-width: 720px)  { .grid { grid-template-columns: repeat(2, 1fr); } }
+    @media (max-width: 420px)  { .grid { grid-template-columns: 1fr; } }
+ 
+    /* ── Card ── */
+    .card {
+      position: relative;
+      aspect-ratio: 4 / 3;
+      overflow: hidden;
+      cursor: pointer;
+      background: var(--surface);
+      opacity: 0;
+      transition: opacity 0.35s ease;
+    }
+ 
+    .card.visible { opacity: 1; }
+ 
+    .card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease, filter 0.3s ease;
+      filter: brightness(0.93);
+    }
+ 
+    .card:hover img {
+      transform: scale(1.04);
+      filter: brightness(0.45);
+    }
+ 
+    /* ── Overlay ── */
+    .card-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 1.2rem 1.1rem 1rem;
+      background: linear-gradient(to top, rgba(0,0,0,0.65) 0%, transparent 50%);
+      opacity: 0;
+      transition: opacity 0.25s ease;
+    }
+ 
+    .card:hover .card-overlay { opacity: 1; }
+ 
+    .card-title {
+      font-weight: 700;
+      font-size: 1rem;
+      color: #fff;
+      line-height: 1.2;
+    }
+ 
+    .card-meta {
+      font-size: 0.68rem;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-top: 0.25rem;
+    }
+</style>
+
+</head>
+<body>
+ <header>
+        <span id="nav-label" hidden>Navigation</span>
+        
+
+
+   <nav class="topnav">
+    <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+        <img src="https://raw.githubusercontent.com/harri3d/Portfolio-Website-Harrison/8bf8d488a439a78c5cde4038d8541cf39c7cdaec/images/logo.svg" class="logo">
+    </a>
+    <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+        <h1 class="dm-sans-name">harrison dorn</h1>
+        <h3 class="dm-sans-subtitle">FX ARTIST | 3D GENERALIST</h3>
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link">Home</a></li>
+                        <li class="topnav__item"></span><a href="gallery.html" class="topnav__link"><span style="color:white">Gallery</span></a></li>
+
+        <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+
+        <div><hr/></div>
+        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+    </ul>
+
+    <!-- Mobile hamburger button -->
+    <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
+        <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
+    </button>
+</nav>
+
+<!-- Mobile-only overlay menu -->
+<nav class="topnav__menu" role="dialog" aria-labelledby="nav-label" id="topnavMenu">
+    <button id="btnClose" class="topnav__close" aria-label="Close">
+        <i class="fa-solid fa-x fa-2xl" style="color: #ffffff;"></i>
+    </button>
+    <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link">Home</a></li>
+        <li class="topnav__item"><a href="gallery.html" class="topnav__link"><span style="color:white">Gallery</span></a></li>
+        <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+        <div><hr/></div>
+        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+    </ul>
+</nav>
+    </header>
+    
+             <span class="mobile-gap"></span>
+   
+<div class="grid" id="grid"></div>
+ 
+<script>
+  const works = [
+    { title: "The Murderbot Diaries Fan Trailer",        category: "3D / Animation",  img: "images/harrison-dorn-maxresdefault.jpg" },
+    { title: "Jumping Spider",     category: "3D Modeling",        img: "images/harrison-dorn-0002.jpg" },
+    { title: "Corvette Stingray",           category: "3D Modeling",      img: "images/harrison-dorn-corvette-stingray1.jpg" },
+    { title: "Witch's Broomstick",           category: "Game Modeling",       img: "images/harrison-dorn-witch-s-broomstick.jpg" },
+    { title: "The Glass Engine",  category: "3D / Product",       img: "https://picsum.photos/seed/glass/800/600" },
+    { title: "Ruin State",        category: "Concept Art",        img: "https://picsum.photos/seed/ruinstate/800/600" },
+    { title: "Soft Geometry",     category: "Abstract",           img: "https://picsum.photos/seed/softgeo/800/600" },
+    { title: "Deep Current",      category: "Environments",       img: "https://picsum.photos/seed/deepc/800/600" },
+    { title: "Stasis",            category: "3D / Character",     img: "https://picsum.photos/seed/stasis9/800/600" },
+    { title: "Mirror Protocol",   category: "UI / Design",        img: "https://picsum.photos/seed/mirror/800/600" },
+    { title: "Lacuna",            category: "Illustration",       img: "https://picsum.photos/seed/lacuna/800/600" },
+    { title: "Fracture Line",     category: "Concept Art",        img: "https://picsum.photos/seed/fractureline/800/600" },
+  ];
+ 
+  const grid = document.getElementById('grid');
+ 
+  works.forEach((work, i) => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <img src="${work.img}" alt="${work.title}" loading="lazy" />
+      <div class="card-overlay">
+        <div class="card-title">${work.title}</div>
+        <div class="card-meta">${work.category}</div>
+      </div>
+    `;
+    grid.appendChild(card);
+    setTimeout(() => card.classList.add('visible'), 40 + i * 50);
+  });
+</script>
+    
+</body>
+
+</html>
