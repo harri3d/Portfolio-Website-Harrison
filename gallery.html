@@ -81,7 +81,7 @@
       font-size: 0.68rem;
       letter-spacing: 0.07em;
       text-transform: uppercase;
-      color: var(--accent);
+      color: #888;
       margin-top: 0.25rem;
     }
 </style>
@@ -148,25 +148,18 @@
  
 <script>
   const works = [
-    { title: "The Murderbot Diaries Fan Trailer",        category: "3D / Animation",  img: "images/harrison-dorn-maxresdefault.jpg" },
-    { title: "Jumping Spider",     category: "3D Modeling",        img: "images/harrison-dorn-0002.jpg" },
-    { title: "Corvette Stingray",           category: "3D Modeling",      img: "images/harrison-dorn-corvette-stingray1.jpg" },
-    { title: "Witch's Broomstick",           category: "Game Modeling",       img: "images/harrison-dorn-witch-s-broomstick.jpg" },
-    { title: "The Glass Engine",  category: "3D / Product",       img: "https://picsum.photos/seed/glass/800/600" },
-    { title: "Ruin State",        category: "Concept Art",        img: "https://picsum.photos/seed/ruinstate/800/600" },
-    { title: "Soft Geometry",     category: "Abstract",           img: "https://picsum.photos/seed/softgeo/800/600" },
-    { title: "Deep Current",      category: "Environments",       img: "https://picsum.photos/seed/deepc/800/600" },
-    { title: "Stasis",            category: "3D / Character",     img: "https://picsum.photos/seed/stasis9/800/600" },
-    { title: "Mirror Protocol",   category: "UI / Design",        img: "https://picsum.photos/seed/mirror/800/600" },
-    { title: "Lacuna",            category: "Illustration",       img: "https://picsum.photos/seed/lacuna/800/600" },
-    { title: "Fracture Line",     category: "Concept Art",        img: "https://picsum.photos/seed/fractureline/800/600" },
+    { slug: "murderbot", title: "The Murderbot Diaries Fan Trailer", category: "3D / Animation", img: "images/harrison-dorn-maxresdefault.jpg" },
+    { slug: "jumping-spider", title: "Jumping Spider", category: "3D Modeling", img: "images/harrison-dorn-0002.jpg" },
+    { slug: "corvette", title: "Corvette Stingray", category: "3D Modeling", img: "images/harrison-dorn-corvette-stingray1.jpg" },
+    { slug: "broomstick", title: "Witch's Broomstick", category: "Game Modeling", img: "images/harrison-dorn-witch-s-broomstick.jpg" },
   ];
- 
+
   const grid = document.getElementById('grid');
- 
+
   works.forEach((work, i) => {
-    const card = document.createElement('div');
+    const card = document.createElement('a');
     card.className = 'card';
+    card.href = `project.html?project=${work.slug}`;
     card.innerHTML = `
       <img src="${work.img}" alt="${work.title}" loading="lazy" />
       <div class="card-overlay">

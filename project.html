@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project | Harrison Dorn VFX</title>
+
+  <link rel="shortcut icon" type="image/svg" href="images/favicon.png"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+
+  <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
+  <script src="js/script.js"></script>
+
+  <style>
+    /* Only project-page-specific styles */
+    body {
+      padding-top: var(--space-8);
+    }
+
+    .page {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .mobile-gap {
+      display: block;
+      height: 5rem;
+    }
+
+    /* Navigation */
+    .nav-arrow,
+    .back-arrow {
+      position: fixed;
+      color: var(--color-muted);
+      transition:
+        color var(--duration-fast) ease,
+        transform var(--duration-fast) ease;
+      z-index: 20;
+    }
+
+    .back-arrow {
+      top: calc(var(--space-8) + 0px);
+  left: calc(var(--sidebar-width) + var(--space-8));
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: var(--text-xs);
+    }
+
+    .nav-arrow {
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: var(--text-xs);
+    }
+
+    .nav-prev {
+  left: calc(var(--sidebar-width) + var(--space-8));
+    }
+
+    .nav-next {
+      right: var(--space-6);
+    }
+
+    .nav-symbol {
+      font-size: 3.5rem;
+      line-height: 0.8;
+      font-weight: 300;
+    }
+
+    .nav-arrow:hover,
+    .back-arrow:hover {
+      color: white;
+    }
+
+    .nav-prev:hover {
+      transform: translateY(-50%) translateX(-4px);
+    }
+
+    .nav-next:hover {
+      transform: translateY(-50%) translateX(4px);
+    }
+
+
+/* Mobile stays normal */
+@media (max-width: 900px) {
+  .back-arrow {
+    left: var(--space-4);
+
+  }
+
+  .nav-prev {
+    left: var(--space-4);
+  }
+}
+
+    /* Hero */
+    .hero-image {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      margin-bottom: var(--space-12);
+      border: 1px solid var(--color-border);
+    }
+
+    /* Project content */
+    .project-category {
+      margin: 0;
+    }
+
+    hr {
+      margin: var(--space-12) 0;
+    }
+
+    .breakdown-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: var(--space-4);
+      margin-top: var(--space-8);
+    }
+
+    .breakdown-grid img,
+    .full-width img {
+      width: 100%;
+      border: 1px solid var(--color-border);
+      object-fit: cover;
+    }
+
+    .breakdown-grid img {
+      aspect-ratio: 4 / 3;
+    }
+
+    .full-width img {
+      aspect-ratio: 16 / 9;
+    }
+
+    @media (max-width: 900px) {
+      .nav-arrow {
+        display: none;
+      }
+
+      .breakdown-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .back-arrow {
+        top: auto;
+        bottom: var(--space-6);
+        left: var(--space-4);
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <span id="nav-label" hidden>Navigation</span>
+
+    <nav class="topnav">
+      <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+        <img src="https://raw.githubusercontent.com/harri3d/Portfolio-Website-Harrison/8bf8d488a439a78c5cde4038d8541cf39c7cdaec/images/logo.svg" class="logo">
+      </a>
+
+      <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+        <h1 class="dm-sans-name">harrison dorn</h1>
+        <h3 class="dm-sans-subtitle">FX ARTIST | 3D GENERALIST</h3>
+      </a>
+
+      <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link">Home</a></li>
+        <li class="topnav__item"><a href="gallery.html" class="topnav__link"><span style="color:white">Gallery</span></a></li>
+        <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+        <div><hr/></div>
+      </ul>
+
+      <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
+        <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
+      </button>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <nav class="topnav__menu" role="dialog" aria-labelledby="nav-label" id="topnavMenu">
+      <button id="btnClose" class="topnav__close" aria-label="Close">
+        <i class="fa-solid fa-x fa-2xl" style="color: #ffffff;"></i>
+      </button>
+
+      <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link">Home</a></li>
+        <li class="topnav__item"><a href="gallery.html" class="topnav__link"><span style="color:white">Gallery</span></a></li>
+        <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+        <div><hr/></div>
+      </ul>
+    </nav>
+  </header>
+
+  <span class="mobile-gap"></span>
+
+  <!-- Project Navigation -->
+  <a href="gallery.html" class="back-arrow">← <span>Back to Gallery</span></a>
+
+  <a href="#" class="nav-arrow nav-prev">
+    <span class="nav-symbol">‹</span>
+  </a>
+
+  <a href="#" class="nav-arrow nav-next">
+    <span class="nav-symbol">›</span>
+  </a>
+
+  <!-- Main Content -->
+  <main class="page">
+
+    <img src="https://picsum.photos/1600/900?random=1" alt="Project Hero" class="hero-image">
+
+    <p class="dm-sans-light project-category">3D / Animation</p>
+    <h1 class="dm-sans-intro">Project Title Placeholder</h1>
+    <p class="dm-sans-tagline">
+      A cinematic exploration of design, motion, and technical execution.
+    </p>
+
+    <hr>
+
+    <section>
+      <h2 class="dm-sans-subheading">Overview</h2>
+      <p class="dm-sans-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Arcu risus quis varius quam quisque id diam vel quam.
+      </p>
+    </section>
+
+    <section>
+      <h2 class="dm-sans-subheading">Process Breakdown</h2>
+      <p class="dm-sans-body">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.
+      </p>
+
+      <div class="breakdown-grid">
+        <img src="https://picsum.photos/800/600?random=2" alt="">
+        <img src="https://picsum.photos/800/600?random=3" alt="">
+        <img src="https://picsum.photos/800/600?random=4" alt="">
+        <img src="https://picsum.photos/800/600?random=5" alt="">
+      </div>
+    </section>
+
+    <section class="full-width">
+      <h2 class="dm-sans-subheading">Final Render</h2>
+      <img src="https://picsum.photos/1600/900?random=6" alt="">
+      <p class="dm-sans-body" style="margin-top: var(--space-6);">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum lorem sed risus ultricies tristique nulla aliquet enim tortor.
+      </p>
+    </section>
+
+  </main>
+
+  <script>
+    const projects = [
+      "murderbot",
+      "jumping-spider",
+      "corvette",
+      "broomstick",
+
+    ];
+
+    const params = new URLSearchParams(window.location.search);
+    const currentProject = params.get("project") || projects[0];
+
+    const currentIndex = projects.indexOf(currentProject);
+
+    const prevProject = projects[(currentIndex - 1 + projects.length) % projects.length];
+    const nextProject = projects[(currentIndex + 1) % projects.length];
+
+    document.querySelector(".nav-prev").href = `project.html?project=${prevProject}`;
+    document.querySelector(".nav-next").href = `project.html?project=${nextProject}`;
+  </script>
+
+</body>
+</html>
