@@ -7,156 +7,320 @@
     <link rel="shortcut icon" type="image/svg" href="images/favicon.png"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="stylesheet" href="styles.css">
+    <!-- <link rel="stylesheet" href="styles.css"> --> <!--Taken out for testing purposes-->
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
     <script src="js/lightbox.js"></script>
 
      
-<script src="js/script.js"></script>
+<!-- <script src="js/script.js"></script> -->
 
-    <style>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const btnOpen = document.querySelector('.topnav__open');
+  const btnClose = document.querySelector('.topnav__close');
+  const menu = document.querySelector('.topnav__menu');
+
+  console.log({ btnOpen, btnClose, menu }); // ← add this to verify all 3 are found
+
+  btnOpen.addEventListener('click', () => {
+    menu.classList.add('is-open');
+    btnOpen.setAttribute('aria-expanded', 'true');
+  });
+
+  btnClose.addEventListener('click', () => {
+    menu.classList.remove('is-open');
+    btnOpen.setAttribute('aria-expanded', 'false');
+  });
+
+  document.querySelectorAll('.topnav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      btnOpen.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      menu.classList.remove('is-open');
+      btnOpen.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+    </script>
+<style>
+/* ─── Design Tokens ────────────────────────────────────────────────────────── */
+
+:root {
+  /* Colors */
+  --color-bg:        #0e0e0e;
+  --color-surface:   #111111;
+  --color-border:    #2a2420;
+  --color-text:      #f5efe8;
+  --color-muted:     #8c7e72;
+--color-accent:       #e8622a;
+  --color-accent-hover: #ff4500;
+
+  /* Type scale (major third, 1.25×) */
+  --text-xs:   0.75rem;   /* 12px */
+  --text-sm:   0.875rem;  /* 14px */
+  --text-base: 1rem;      /* 16px */
+  --text-md:   1.25rem;   /* 20px */
+  --text-lg:   1.5rem;    /* 24px */
+  --text-xl:   2rem;      /* 32px */
+  --text-2xl:  2.5rem;    /* 40px */
+  --text-3xl:  3.25rem;   /* 52px */
+
+  /* Spacing */
+  --space-1:  0.25rem;
+  --space-2:  0.5rem;
+  --space-3:  0.75rem;
+  --space-4:  1rem;
+  --space-6:  1.5rem;
+  --space-8:  2rem;
+  --space-12: 3rem;
+  --space-16: 4rem;
+  --space-24: 6rem;
+
+  /* Layout */
+  --sidebar-width: 220px;
+  --content-max:   760px;
+
+  /* Motion */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --duration-fast: 120ms;
+  --duration-base: 220ms;
+  --duration-slow: 500ms;
+}
+
+/* ─── Animations ────────────────────────────────────────────────────────────── */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes unblur {
+  from { filter: blur(3px); opacity: 0.1; }
+  to   { filter: blur(0);   opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0; }
+  50%       { opacity: 1; }
+}
+
+/* ─── Reset / Base ──────────────────────────────────────────────────────────── */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 
 
-        .lightbox-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.75);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1000;
+html, body {
+  height: 100%;
+
+}
+
+body {
+  margin: 0;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: "DM Sans", sans-serif;
+  font-size: var(--text-base);
+  font-weight: 300;
+  line-height: 1.65;
+  padding-left: calc(var(--sidebar-width) + var(--space-8));
+  padding-right: var(--space-6);
+  padding-top: var(--space-8);
+  padding-bottom: var(--space-24);
+}
+
+
+
+/* ─── Navigation ─────────────────────────────────────────────────────────────── */
+
+.topnav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-width);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: var(--space-16) var(--space-6) var(--space-16) var(--space-4);
+  overflow-y: auto;
+  z-index: 100;
+  border-right: 1px solid var(--color-border);
+  background-color: var(--color-bg);
+}
+
+.topnav button {
+  display: none;
+  position: fixed;
+  right: var(--space-4);
+  top: var(--space-4);
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--color-text);
+  z-index: 200;
+}
+
+.topnav__links {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  text-align: right;
+}
+
+.topnav__item {
+  list-style: none;
+}
+
+.topnav__link {
+  font-size: var(--text-sm);
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--color-muted);
+  text-decoration: none;
+  display: block;
+  padding: var(--space-1) 0;
+  transition: color var(--duration-fast) ease;
+}
+
+.topnav__link:hover,
+.topnav__link.active {
+  color: var(--color-text);
+}
+
+/* Desktop styles for topnav__menu */
+.topnav__menu {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ─── Logo ───────────────────────────────────────────────────────────────────── */
+
+.logo {
+  width: 100%;
+  height: auto;
+  display: block;
+  margin-bottom: var(--space-6);
+  padding: 0 var(--space-2);
+}
+
+
+/* ─── Responsive ─────────────────────────────────────────────────────────────── */
+
+        .mobile-gap {
+        display: none;
+        height: 0;
         }
-        .lightbox-content {
-            max-width: 90%;
-            max-height: 90%;
-        }
-        .lightbox-image {
-            max-width: 100%;
-            max-height: 90vh;
-            object-fit: contain;
-        }
 
-        body {
-            font-family: 'DM Sans', sans-serif;
-        }
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            overflow: hidden; /* Prevent scrollbar */
-        }
-
-        .project-card {
-            position: relative;
-            overflow: hidden;
-            aspect-ratio: 3 / 2; /* Maintain aspect ratio */
-            transition: box-shadow 0.3s ease-in-out;
-            margin: 10px;
-
-
-        }
-
-        .project-image {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.3s ease;
-        }
-
-        .project-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(45deg, rgba(255, 123, 0, 0.808), rgb(255, 72, 0));
-            opacity: 0;
-            mix-blend-mode: overlay;
-            transition: opacity 0.3s ease;
-            pointer-events: none;
-
-
-
-        }
-
-        .project-card:hover .project-image {
-            transform: scale(1.05);
-
-
-        }
-        .project-card:hover {
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.116);
-            }
-
-        .project-card:hover .project-overlay {
-            opacity: 1;
-        }
-        
-        .about-image-link {
-        display: inline-block;
-        border-radius: 30px;
-        overflow: hidden;
-        transition: box-shadow 0.3s ease-out;
-        }
-        .about-image-link img {
+        @media (max-width: 80em) {
+        .mobile-gap {
             display: block;
-            width: 5rem;
-            height: 5rem;
-            object-fit: cover;
+            height: 10vh;
         }
-        .about-image-link:hover {
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.13);
-            transform: scale(1.03);
-
-        }
-        .container {
-            height: 100vh;
-            overflow-y: scroll;
         }
 
-        .card {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: visible;
-            box-sizing: border-box;
-            margin-bottom: 10px;
+        @media (max-width: 768px) {
+        .mobile-gap {
+            display: block;
+            height: 5vh;
         }
-        .card-content {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            will-change: transform;
-            transition: transform 0.3s ease-out; /* Increased duration for smoother effect */
         }
-        .card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.055);
-            opacity: 0;
-            transform: scale(0.97);
-            transition: 
-                opacity .7s ease-in-out, /* Increased duration */
-                transform .7s ease-in-out; /* Increased duration */
-            will-change: opacity, transform;
-        }
-        .card.active img {
-            opacity: 1;
-            transform: scale(1);
-        }
-        .card.above img {
-            opacity: 0;
-            transform: scale(0.97);
-        }
+
+@media (max-width: 80em) {
+  body {
+    padding: var(--space-16) var(--space-4) var(--space-12);
+        overflow-x: hidden;  /* already on body globally, but reinforce here */
+
+  }
+
+.topnav .topnav__links {
+    display: none;
+  }
+  
+  /* Hamburger button visible on mobile */
+    .topnav button {
+    display: block;
+    position: fixed;
+    right: var(--space-4);
+    top: var(--space-4);
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    color: var(--color-text);
+    z-index: 200;
+  }
+
+  .topnav {
+    width: 100%;
+    height: auto;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: var(--space-3) var(--space-4);
+    border-right: none;
+    border-bottom: 1px solid var(--color-border);
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+  .topnav__menu {
+    display: block;
+    position: fixed;
+    inset: 0;
+    padding: var(--space-16) var(--space-8);
+    background: linear-gradient(135deg, var(--color-bg) 60%, rgba(8,8,8,0.95) 100%);
+    z-index: 150;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s var(--ease-out);
+  }
+
+  .topnav__menu.is-open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .topnav__close {
+    display: block;
+    background: none;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  .topnav__links {
+    flex-direction: column;
+    gap: var(--space-3);
+    text-align: left;
+    padding: var(--space-8) 0;
+  }
+
+  .topnav__link {
+    font-size: var(--text-lg);
+  }
+
+  .logo {
+    width: 32px;
+    padding: 0;
+    margin: 0;
+  }
+
+}
     </style>
-
+   
 </head>
 <body>
  <header>
@@ -180,10 +344,7 @@
         <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
 
         <div><hr/></div>
-        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
-        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
-        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
-        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+
     </ul>
 
     <!-- Mobile hamburger button -->
@@ -203,75 +364,10 @@
 
         <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
         <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
-        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
-        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
-        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
-        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+
     </ul>
 </nav>
     </header>
 </body>
-<!-- <script>
-        const container = document.querySelector('.container');
-        const cards = document.querySelectorAll('.card');
-        let lastScrollTop = container.scrollTop;
-        let ticking = false;
-
-        const updateCardClasses = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('active');
-                    entry.target.classList.remove('above');
-                } else {
-                    entry.target.classList.remove('active');
-                    const rect = entry.boundingClientRect;
-                    if (rect.top > window.innerHeight) {
-                        entry.target.classList.remove('above');
-                    } else if (rect.bottom < 0) {
-                        entry.target.classList.add('above');
-                    }
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(updateCardClasses, {
-            threshold: [0, 0.1, 0.5, 1],
-            rootMargin: '-5% 0px -5% 0px'
-        });
-
-        cards.forEach(card => observer.observe(card));
-
-        const parallaxEffect = () => {
-            const scrolled = container.scrollTop;
-            const scrollDiff = scrolled - lastScrollTop;
-            
-            cards.forEach((card) => {
-                const cardContent = card.querySelector('.card-content');
-                const rect = card.getBoundingClientRect();
-                const centerY = rect.top + rect.height / 2;
-                const distanceFromCenter = centerY - window.innerHeight / 2;
-                
-                let yPos = parseFloat(cardContent.getAttribute('data-y') || 0);
-                yPos -= scrollDiff * 0.15 * (distanceFromCenter / window.innerHeight); // Reduced from 0.5 to 0.15
-                yPos = Math.max(-20, Math.min(45, yPos)); // Reduced from ±150 to ±45
-                
-                cardContent.style.transform = `translateY(${yPos}px)`;
-                cardContent.setAttribute('data-y', yPos);
-            });
-
-            lastScrollTop = scrolled;
-        };
-
-        container.addEventListener('scroll', () => {
-            if (!ticking) {
-                window.requestAnimationFrame(() => {
-                    parallaxEffect();
-                    observer.takeRecords().forEach(entry => updateCardClasses([entry], observer));
-                    ticking = false;
-                });
-                ticking = true;
-            }
-        }, { passive: true });
-</script> -->
 
 </html>
