@@ -9,6 +9,41 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
+
+    
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+  const btnOpen = document.querySelector('.topnav__open');
+  const btnClose = document.querySelector('.topnav__close');
+  const menu = document.querySelector('.topnav__menu');
+
+  console.log({ btnOpen, btnClose, menu }); // ← add this to verify all 3 are found
+
+  btnOpen.addEventListener('click', () => {
+    menu.classList.add('is-open');
+    btnOpen.setAttribute('aria-expanded', 'true');
+  });
+
+  btnClose.addEventListener('click', () => {
+    menu.classList.remove('is-open');
+    btnOpen.setAttribute('aria-expanded', 'false');
+  });
+
+  document.querySelectorAll('.topnav__link').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      btnOpen.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') {
+      menu.classList.remove('is-open');
+      btnOpen.setAttribute('aria-expanded', 'false');
+    }
+  });
+});
+    </script>
 </head>
 <body>
  <header>
