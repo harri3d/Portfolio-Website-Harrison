@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Harrison Dorn VFX</title>
+    <link rel="shortcut icon" type="image/svg" href="images/favicon.png"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/b6c3c84ba4.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/rick-liruixin/body-scroll-lock-upgrade@v1.1.0/lib/index.umd.js"></script>
+    <script src="js/lightbox.js"></script>
+
+     
+<script src="js/script.js"></script>
+
+    <style>
+
+
+        .lightbox-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.75);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        .lightbox-content {
+            max-width: 90%;
+            max-height: 90%;
+        }
+        .lightbox-image {
+            max-width: 100%;
+            max-height: 90vh;
+            object-fit: contain;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+        }
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            overflow: hidden; /* Prevent scrollbar */
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            aspect-ratio: 3 / 2; /* Maintain aspect ratio */
+            transition: box-shadow 0.3s ease-in-out;
+            margin: 10px;
+
+
+        }
+
+        .project-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .project-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, rgba(255, 123, 0, 0.808), rgb(255, 72, 0));
+            opacity: 0;
+            mix-blend-mode: overlay;
+            transition: opacity 0.3s ease;
+            pointer-events: none;
+
+
+
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+
+
+        }
+        .project-card:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.116);
+            }
+
+        .project-card:hover .project-overlay {
+            opacity: 1;
+        }
+        
+        .about-image-link {
+        display: inline-block;
+        border-radius: 30px;
+        overflow: hidden;
+        transition: box-shadow 0.3s ease-out;
+        }
+        .about-image-link img {
+            display: block;
+            width: 5rem;
+            height: 5rem;
+            object-fit: cover;
+        }
+        .about-image-link:hover {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.13);
+            transform: scale(1.03);
+
+        }
+        .container {
+            height: 100vh;
+            overflow-y: scroll;
+        }
+
+        .card {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: visible;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+        .card-content {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            will-change: transform;
+            transition: transform 0.3s ease-out; /* Increased duration for smoother effect */
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.055);
+            opacity: 0;
+            transform: scale(0.97);
+            transition: 
+                opacity .7s ease-in-out, /* Increased duration */
+                transform .7s ease-in-out; /* Increased duration */
+            will-change: opacity, transform;
+        }
+        .card.active img {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .card.above img {
+            opacity: 0;
+            transform: scale(0.97);
+        }
+    </style>
+
+</head>
+<body>
+ <header>
+        <span id="nav-label" hidden>Navigation</span>
+        
+
+
+   <nav class="topnav">
+    <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+    </a>
+    <a href="index.html" style="text-decoration: none; color: inherit; cursor: pointer; margin: 0px;">
+
+    </a>
+
+    <!-- Desktop links -->
+    <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link"><span style="color:white">Home</span></a></li>
+                        <li class="topnav__item"></span><a href="gallery.html" class="topnav__link">Gallery</a></li>
+
+        <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+
+        <div><hr/></div>
+        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+    </ul>
+
+    <!-- Mobile hamburger button -->
+    <button id="btnOpen" class="topnav__open" aria-expanded="false" aria-labelledby="nav-label">
+        <i class="fa-solid fa-bars fa-2xl" style="color: #ffffff;"></i>
+    </button>
+</nav>
+
+<!-- Mobile-only overlay menu -->
+<nav class="topnav__menu" role="dialog" aria-labelledby="nav-label" id="topnavMenu">
+    <button id="btnClose" class="topnav__close" aria-label="Close">
+        <i class="fa-solid fa-x fa-2xl" style="color: #ffffff;"></i>
+    </button>
+    <ul class="topnav__links">
+        <li class="topnav__item"><a href="index.html" class="topnav__link"><span style="color:white">Home</span></a></li>
+        <li class="topnav__item"><a href="gallery.html" class="topnav__link">Gallery</a></li>
+
+        <li class="topnav__item"><a href="about.html" class="topnav__link">About</a></li>
+        <li class="topnav__item"><a href="contact.html" class="topnav__link">Contact</a></li>
+        <!-- <li class="topnav__item"><a href="cello.html" class="topnav__link">Cello</a></li>
+        <li class="topnav__item"><a href="cannon-bomb.html" class="topnav__link">Cannon-Bomb</a></li>
+        <li class="topnav__item"><a href="uzumaki.html" class="topnav__link">Uzumaki</a></li>
+        <li class="topnav__item"><a href="motion-design.html" class="topnav__link">Motion Design</a></li> -->
+    </ul>
+</nav>
+    </header>
+</body>
+<!-- <script>
+        const container = document.querySelector('.container');
+        const cards = document.querySelectorAll('.card');
+        let lastScrollTop = container.scrollTop;
+        let ticking = false;
+
+        const updateCardClasses = (entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    entry.target.classList.remove('above');
+                } else {
+                    entry.target.classList.remove('active');
+                    const rect = entry.boundingClientRect;
+                    if (rect.top > window.innerHeight) {
+                        entry.target.classList.remove('above');
+                    } else if (rect.bottom < 0) {
+                        entry.target.classList.add('above');
+                    }
+                }
+            });
+        };
+
+        const observer = new IntersectionObserver(updateCardClasses, {
+            threshold: [0, 0.1, 0.5, 1],
+            rootMargin: '-5% 0px -5% 0px'
+        });
+
+        cards.forEach(card => observer.observe(card));
+
+        const parallaxEffect = () => {
+            const scrolled = container.scrollTop;
+            const scrollDiff = scrolled - lastScrollTop;
+            
+            cards.forEach((card) => {
+                const cardContent = card.querySelector('.card-content');
+                const rect = card.getBoundingClientRect();
+                const centerY = rect.top + rect.height / 2;
+                const distanceFromCenter = centerY - window.innerHeight / 2;
+                
+                let yPos = parseFloat(cardContent.getAttribute('data-y') || 0);
+                yPos -= scrollDiff * 0.15 * (distanceFromCenter / window.innerHeight); // Reduced from 0.5 to 0.15
+                yPos = Math.max(-20, Math.min(45, yPos)); // Reduced from ±150 to ±45
+                
+                cardContent.style.transform = `translateY(${yPos}px)`;
+                cardContent.setAttribute('data-y', yPos);
+            });
+
+            lastScrollTop = scrolled;
+        };
+
+        container.addEventListener('scroll', () => {
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    parallaxEffect();
+                    observer.takeRecords().forEach(entry => updateCardClasses([entry], observer));
+                    ticking = false;
+                });
+                ticking = true;
+            }
+        }, { passive: true });
+</script> -->
+
+</html>
