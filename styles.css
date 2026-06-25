@@ -11,13 +11,14 @@
   --color-border:    #2a2420;
   --color-text:      #f5efe8;
   --color-muted:     #8c7e72;
+  --color-mixed: #4B423B;
 --color-accent:       #e8622a;
   --color-accent-hover: #ff4500;
 
   /* Type scale (major third, 1.25×) */
   --text-xs:   0.75rem;   /* 12px */
   --text-sm:   0.875rem;  /* 14px */
-  --text-base: 1rem;      /* 16px */
+  --text-base: .9rem;      /* 16px */
   --text-md:   1.25rem;   /* 20px */
   --text-lg:   1.5rem;    /* 24px */
   --text-xl:   2rem;      /* 32px */
@@ -89,7 +90,9 @@ body {
   padding-bottom: var(--space-24);
 }
 
-
+p {
+  font-family: "Inter", sans-serif;
+}
 
 hr {
   border: none;
@@ -101,7 +104,7 @@ hr {
 /* ─── Links ─────────────────────────────────────────────────────────────────── */
 
 a {
-  color: orange;
+  color: #FF6A00;
   text-decoration: none;
   transition: color var(--duration-fast) ease;
 }
@@ -129,7 +132,7 @@ a {
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--color-muted);
-  text-align: right;
+  text-align: left;
   margin-top: calc(-1 * var(--space-3));
   margin-bottom: var(--space-6);
 }
@@ -165,12 +168,12 @@ a {
 
 /* Sidebar / nav name */
 .dm-sans-name {
-  font-size: var(--text-md);
-  font-weight: 600;
+  font-size: 1.5em;
+  font-weight: 500;
+  text-transform:capitalize;
   line-height: 1.2;
-  letter-spacing: -0.01em;
   margin: 0 0 var(--space-6);
-  text-align: right;
+  text-align: left;
   color: var(--color-text);
 }
 
@@ -249,7 +252,7 @@ a {
 }
 
 .topnav__link {
-  font-size: var(--text-sm);
+  font-size: 2.5em;
   font-weight: 500;
   letter-spacing: 0.04em;
   color: var(--color-muted);
@@ -279,6 +282,8 @@ a {
   display: block;
   margin-bottom: var(--space-6);
   padding: 0 var(--space-2);
+  justify-content: left;
+  padding-right:30px;
 }
 
 /* ─── Layout ─────────────────────────────────────────────────────────────────── */
@@ -303,7 +308,7 @@ a {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: var(--space-6);
-  max-width: var(--content-max);
+  max-width: 1200px;
   margin: var(--space-8) 0;
   animation: fadeUp var(--duration-slow) var(--ease-out) both;
 }
@@ -311,23 +316,22 @@ a {
 /* ─── Buttons ────────────────────────────────────────────────────────────────── */
 
 .text-button {
-  font-family: "DM Sans", sans-serif;
   font-size: var(--text-base);
   font-weight: 500;
-  background-color: #333;
-  border: 1px solid var(--color-border);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-mixed);
   color: var(--color-text);
   border-radius: 20px;
   padding: var(--space-3) var(--space-6);
   cursor: pointer;
   transition:
-    background-color var(--duration-base) ease,
-    border-color var(--duration-base) ease;
+    background-color var(--duration-fast) ease,
+    border-color var(--duration-fast) ease;
 }
 
 .text-button:hover {
-  background-color: var(--color-border);
-  border-color: #6b7cd5;
+  background-color: var(--color-bg);
+  border-color: white;
 }
 
 /* ─── Form ───────────────────────────────────────────────────────────────────── */
@@ -354,7 +358,7 @@ form {
 }
 
 .input:focus {
-  border-color: var(--color-accent);
+  border-color: white;
 }
 
 /* ─── Media / Images ─────────────────────────────────────────────────────────── */
@@ -758,7 +762,7 @@ form {
     padding: 0;
     cursor: pointer;
     color: var(--color-text);
-  z-index: 400;
+    z-index: 200;
   }
 
   .topnav {
@@ -771,8 +775,6 @@ form {
     border-right: none;
     border-bottom: 1px solid var(--color-border);
     position: fixed;
-      z-index: 300;
-
     top: 0;
     left: 0;
   }
@@ -782,7 +784,7 @@ form {
     inset: 0;
     padding: var(--space-16) var(--space-8);
     background: linear-gradient(135deg, var(--color-bg) 60%, rgba(8,8,8,0.95) 100%);
-  z-index: 250;
+    z-index: 150;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.2s var(--ease-out);
