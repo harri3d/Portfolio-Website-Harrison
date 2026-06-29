@@ -48,12 +48,34 @@
 
     <style>
 
+.image-column {
+    position: relative;
+}
 
-        .image-column {
-            position: relative;
-            perspective: 1000px;
-        }
+.glass-card {
+    margin-top: 30%;
+    margin-left: 20%;
 
+    @media (max-width: 768px) {
+        margin-top: 50px;
+        margin-left: 0;
+    }
+}
+
+.glass-card img {
+    height: 300px;
+    width: auto;
+    max-width: 100%;
+    display: block;
+    border-radius: 20%;
+    position: relative;
+    z-index: 1;
+
+    @media (max-width: 768px) {
+        height: auto;
+        width: 100%;
+    }
+}
 
 
 
@@ -95,28 +117,7 @@
                 grid-template-columns: 1fr;
             }
         }
-.glass-card {
-    position: relative;
-    margin-top: 30%;
-    margin-left: 20%;
 
-    @media (max-width: 768px) {
-        margin-top: 50px;
-    }
-}
-
-.glass-card img {
-    width: auto;
-    height: 300px;
-    display: block;
-    border-radius: 50%;
-    position: relative;
-    z-index: 1;
-
-    @media (max-width: 768px) {
-        display: none;
-    }
-}
 
 /* .glass-card::before,
 .glass-card::after {
@@ -227,9 +228,12 @@
     <div class="container">
         <div class="image-column" style="justify-content: center">
             <div class="glass-card">
-                <img src="images/profile-pic-white-cropped.png" alt="Placeholder portrait image">
+                <img src="images/headshot_close.png" alt="Placeholder portrait image">
+                <img src="images/headshot_far.png" alt="Placeholder portrait image" >
+
                 <div class="highlight-card"></div>
             </div>
+            
         </div>
         <div class="text-column">
             <!-- <h2 class="dm-sans-subtitle">the man the myth the legend</h2> -->
@@ -238,9 +242,9 @@
 
      
 
-<p class="dm-sans-body">I’m an FX artist  passionate about creating believable natural phenomena as well as surreal imaginings. I studied at Gnomon School of Visual Effects, with a concentration in VFX and simulations.</p>
+<p class="dm-sans-body">I’m an FX artist  passionate about creating realistic simulations as well as surreal and abstract imaginings. I studied at Gnomon School of Visual Effects, with a concentration in VFX and simulations.</p>
 
-<p>I’m drawn to the challenge of making the impossible feel real, which always feels like a kind of magic. My background in traditional drawing and painting informs everything I do.</p>
+<p>I’m drawn to the challenge of making the impossible feel real, which I think is a kind of magic. Everything I do is informed by my background in traditional drawing and painting.</p>
 
   <a href="files/Harrison Dorn_Resume.pdf" download="files/Harrison Dorn_Resume.pdf" target="_blank" rel="noopener noreferrer" class="resume-download-link">
     <span>Harrison Dorn_Resume.pdf</span>
