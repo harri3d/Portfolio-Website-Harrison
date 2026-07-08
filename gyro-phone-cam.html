@@ -168,6 +168,14 @@
 <div id="stage"></div>
 <div id="focusSquare"></div>
 
+<!--
+  Default panorama video. Drop your equirectangular render next to this HTML
+  file and name it "pano.mp4" (H.264 .mp4 is the safest bet for both iOS and
+  Android Safari/Chrome). Or just change the src below to point wherever you
+  host it. Muted + playsinline + loop are required for it to autoplay on iOS.
+-->
+<video id="panoVideo" src="pano.mp4" muted playsinline loop preload="auto" crossorigin="anonymous" style="display:none"></video>
+
 <div id="statusbar">
   <span id="clock">9:41</span>
   <div class="icons">
@@ -216,7 +224,7 @@
     <input type="range" id="yawTrim" min="-180" max="180" value="0">
   </div>
   <button class="file-btn" id="loadPanoBtn">Load equirectangular render&hellip;</button>
-  <input type="file" id="panoInput" accept="image/*">
+  <input type="file" id="panoInput" accept="image/*,video/*">
   <button class="action-btn" id="calBtn" style="margin-top:14px;">Re-zero forward now</button>
 </div>
 
@@ -330,7 +338,34 @@
     sphereMat.color.set(0xffffff);
     sphereMat.needsUpdate = true;
   }
+
+  function applyVideoTexture(videoEl) {
+    const tex = new THREE.VideoTexture(videoEl);
+    applyTexture(tex);
+  }
+
+  // start on the placeholder so there's always something on screen,
+  // then try to swap in the default pano video once it's ready
   applyTexture(buildPlaceholderPano());
+
+  const defaultVideo = document.getElementById('panoVideo');
+  let defaultVideoReady = false;
+  defaultVideo.addEventListener('loadeddata', () => { defaultVideoReady = true; }, { once: true });
+  defaultVideo.addEventListener('error', () => {
+    console.warn('No default pano.mp4 found next to this file — showing placeholder. ' +
+      'Add your video (named pano.mp4, or edit the <video src> in the HTML) or load one from Settings.');
+  });
+
+  // iOS requires video.play() to happen inside a user-gesture handler,
+  // so we kick it off from the Start button tap, not on page load.
+  function tryStartDefaultVideo() {
+    defaultVideo.play().then(() => {
+      applyVideoTexture(defaultVideo);
+    }).catch(() => {
+      // autoplay blocked or file missing — placeholder stays up, and this
+      // will retry silently next time tryStartDefaultVideo() is called
+    });
+  }
 
   document.getElementById('loadPanoBtn').addEventListener('click', () => {
     document.getElementById('panoInput').click();
@@ -339,7 +374,13 @@
     const file = e.target.files[0];
     if (!file) return;
     const url = URL.createObjectURL(file);
-    new THREE.TextureLoader().load(url, applyTexture);
+    if (file.type.startsWith('video/')) {
+      const v = document.createElement('video');
+      v.src = url; v.muted = true; v.loop = true; v.playsInline = true;
+      v.play().then(() => applyVideoTexture(v)).catch(() => applyVideoTexture(v));
+    } else {
+      new THREE.TextureLoader().load(url, applyTexture);
+    }
   });
 
   // ---------- FOV / yaw trim ----------
@@ -469,6 +510,7 @@
       } catch (err) { return; }
     }
     window.addEventListener('deviceorientation', onOrientation, true);
+    tryStartDefaultVideo();
     document.getElementById('gate').style.display = 'none';
     setTimeout(calibrate, 300);
   });
