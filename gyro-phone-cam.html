@@ -19,7 +19,7 @@
     font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'Helvetica Neue', sans-serif;
     overflow: hidden; overscroll-behavior: none;
   }
-  #stage { position: fixed; inset: 0; }
+  #stage { position: fixed; inset: 0; touch-action: none; }
   canvas { display: block; touch-action: none; }
 
   /* ---------- pre-roll gate (setup only, not part of the "in-shot" look) ---------- */
@@ -92,7 +92,7 @@
   #thumb {
     width: 46px; height: 46px; border-radius: 9px;
     background: #1c1c1e; border: 1px solid rgba(255,255,255,0.25);
-    justify-self: start;
+    justify-self: start; cursor: pointer;
   }
   #shutter {
     width: 74px; height: 74px; border-radius: 50%;
@@ -220,8 +220,8 @@
     <input type="range" id="fovSlider" min="30" max="100" value="62">
   </div>
   <div class="field">
-    <label>Yaw trim <span class="val" id="yawVal">0&deg;</span></label>
-    <input type="range" id="yawTrim" min="-180" max="180" value="0">
+    <label>Yaw trim <span class="val" id="yawVal">100&deg;</span></label>
+    <input type="range" id="yawTrim" min="-180" max="180" value="100">
   </div>
   <button class="file-btn" id="loadPanoBtn">Load equirectangular render&hellip;</button>
   <input type="file" id="panoInput" accept="image/*,video/*">
@@ -386,7 +386,7 @@
   // ---------- FOV / yaw trim ----------
   const fovSlider = document.getElementById('fovSlider');
   const yawTrim = document.getElementById('yawTrim');
-  let yawTrimRad = 0;
+  let yawTrimRad = THREE.MathUtils.degToRad(100);
   fovSlider.addEventListener('input', () => {
     camera.fov = parseFloat(fovSlider.value);
     camera.updateProjectionMatrix();
@@ -443,18 +443,53 @@
     fs.classList.remove('ping'); void fs.offsetWidth; fs.classList.add('ping');
   }
 
-  // double-tap anywhere on the viewfinder (not on chrome) re-zeros forward,
-  // disguised as a tap-to-focus gesture
-  let lastTap = 0;
-  document.getElementById('stage').addEventListener('pointerdown', (e) => {
-    const now = Date.now();
-    if (now - lastTap < 300) {
-      calibrate();
-      lastTap = 0;
-    } else {
-      lastTap = now;
+  // tapping the thumbnail (where the Photos app shortcut normally lives)
+  // re-zeros forward instead
+  document.getElementById('thumb').addEventListener('click', calibrate);
+
+  // pinch-to-zoom on the viewfinder drives FOV, mirroring the real camera app
+  const pinchState = { active: false, startDist: 0, startFov: 62, pointers: new Map() };
+  const stageEl = document.getElementById('stage');
+
+  function currentFov() { return camera.fov; }
+  function setFov(v) {
+    v = Math.max(30, Math.min(100, v));
+    camera.fov = v;
+    camera.updateProjectionMatrix();
+    fovSlider.value = v;
+    document.getElementById('fovVal').textContent = Math.round(v) + '\u00B0';
+  }
+
+  function pointerDist(pts) {
+    const [a, b] = pts;
+    return Math.hypot(a.x - b.x, a.y - b.y);
+  }
+
+  stageEl.addEventListener('pointerdown', (e) => {
+    pinchState.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinchState.pointers.size === 2) {
+      pinchState.active = true;
+      pinchState.startDist = pointerDist([...pinchState.pointers.values()]);
+      pinchState.startFov = currentFov();
     }
   });
+  stageEl.addEventListener('pointermove', (e) => {
+    if (!pinchState.pointers.has(e.pointerId)) return;
+    pinchState.pointers.set(e.pointerId, { x: e.clientX, y: e.clientY });
+    if (pinchState.active && pinchState.pointers.size === 2) {
+      const dist = pointerDist([...pinchState.pointers.values()]);
+      // fingers spreading (dist grows) -> narrower FOV (zoom in)
+      const scale = pinchState.startDist / Math.max(dist, 1);
+      setFov(pinchState.startFov * scale);
+    }
+  });
+  function endPointer(e) {
+    pinchState.pointers.delete(e.pointerId);
+    if (pinchState.pointers.size < 2) pinchState.active = false;
+  }
+  stageEl.addEventListener('pointerup', endPointer);
+  stageEl.addEventListener('pointercancel', endPointer);
+  stageEl.addEventListener('pointerleave', endPointer);
 
   // ---------- shutter (cosmetic record state + timer) ----------
   let recording = false, recStart = 0, timerHandle = null;
