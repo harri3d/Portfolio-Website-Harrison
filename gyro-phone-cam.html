@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>Gyro Panorama Cam</title>
+<style>
+  :root {
+    --ink: #0a0b0d;
+    --panel: rgba(14, 15, 18, 0.82);
+    --line: rgba(255,255,255,0.14);
+    --text: #e8e6e1;
+    --dim: #8b8d92;
+    --accent: #c94f3d; /* embered warning red, not the AI-orange default */
+    --accent-soft: rgba(201, 79, 61, 0.18);
+    --mono: 'SF Mono', 'JetBrains Mono', 'Menlo', monospace;
+  }
+  * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+  html, body {
+    margin: 0; padding: 0; width: 100%; height: 100%;
+    background: var(--ink); color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    overflow: hidden; overscroll-behavior: none;
+  }
+  #stage { position: fixed; inset: 0; }
+  canvas { display: block; touch-action: none; }
+
+  #gate {
+    position: fixed; inset: 0; z-index: 50;
+    background: var(--ink);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 18px; padding: 32px;
+    text-align: center;
+  }
+  #gate h1 {
+    font-size: 15px; letter-spacing: 0.14em; text-transform: uppercase;
+    color: var(--dim); font-weight: 600; margin: 0;
+  }
+  #gate p { font-size: 13px; color: var(--dim); max-width: 320px; line-height: 1.6; margin: 0; }
+  .btn {
+    font-family: inherit; font-size: 14px; font-weight: 600;
+    letter-spacing: 0.02em;
+    padding: 14px 28px; border-radius: 3px; border: 1px solid var(--line);
+    background: var(--panel); color: var(--text); cursor: pointer;
+    backdrop-filter: blur(6px);
+  }
+  .btn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn:active { transform: scale(0.97); }
+
+  #hud {
+    position: fixed; left: 0; right: 0; bottom: 0; z-index: 30;
+    padding: 10px 12px calc(14px + env(safe-area-inset-bottom));
+    display: flex; flex-direction: column; gap: 8px;
+    background: linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0));
+    pointer-events: none;
+  }
+  #hud > * { pointer-events: auto; }
+
+  #row-main { display: flex; gap: 8px; align-items: center; }
+  .pill {
+    flex: 1; text-align: center; font-size: 12px; font-weight: 600;
+    letter-spacing: 0.04em; text-transform: uppercase;
+    padding: 12px 8px; border-radius: 3px;
+    background: var(--panel); border: 1px solid var(--line); color: var(--text);
+  }
+  .pill.rec { background: var(--accent-soft); border-color: var(--accent); color: #ffb3a6; }
+  .pill.rec .dot {
+    display: inline-block; width: 7px; height: 7px; border-radius: 50%;
+    background: var(--accent); margin-right: 6px;
+    animation: pulse 1.1s infinite;
+  }
+  @keyframes pulse { 0%,100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+  #row-meta {
+    display: flex; justify-content: space-between; font-family: var(--mono);
+    font-size: 10.5px; color: var(--dim); padding: 0 4px;
+  }
+
+  #row-settings {
+    display: none; gap: 10px; background: var(--panel); border: 1px solid var(--line);
+    border-radius: 4px; padding: 12px; font-size: 12px; color: var(--dim);
+  }
+  #row-settings.open { display: flex; flex-direction: column; }
+  #row-settings label { display: flex; justify-content: space-between; gap: 10px; color: var(--text); }
+  #row-settings input[type=range] { flex: 1; accent-color: var(--accent); }
+  #row-settings .file-btn {
+    font-size: 12px; padding: 8px 10px; border-radius: 3px; border: 1px solid var(--line);
+    background: rgba(255,255,255,0.05); color: var(--text); text-align: center; cursor: pointer;
+  }
+
+  #crosshair {
+    position: fixed; top: 50%; left: 50%; transform: translate(-50%,-50%);
+    width: 22px; height: 22px; z-index: 20; pointer-events: none; opacity: 0.55;
+  }
+  #crosshair::before, #crosshair::after {
+    content: ''; position: absolute; background: var(--text);
+  }
+  #crosshair::before { width: 1px; height: 22px; left: 50%; transform: translateX(-50%); }
+  #crosshair::after { height: 1px; width: 22px; top: 50%; transform: translateY(-50%); }
+
+  #toast {
+    position: fixed; top: calc(16px + env(safe-area-inset-top)); left: 50%; transform: translateX(-50%);
+    background: var(--panel); border: 1px solid var(--line); border-radius: 3px;
+    padding: 9px 14px; font-size: 12px; color: var(--text); z-index: 40;
+    opacity: 0; transition: opacity 0.25s ease; pointer-events: none; max-width: 86%; text-align: center;
+  }
+  #toast.show { opacity: 1; }
+
+  input[type=file] { display: none; }
+</style>
+</head>
+<body>
+
+<div id="stage"></div>
+<div id="crosshair"></div>
+<div id="toast"></div>
+
+<div id="gate">
+  <h1>Gyro Panorama Cam</h1>
+  <p>Renders a fixed 360&deg; scene and lets the phone's own tilt/rotation aim the camera into it &mdash; like the phone is a window standing inside the shot.</p>
+  <button class="btn primary" id="startBtn">Start</button>
+  <p id="gateSub" style="font-size:11px;">Load your own equirectangular render after starting, or test with the placeholder scene first.</p>
+</div>
+
+<div id="hud">
+  <div id="row-settings">
+    <label>Field of view <input type="range" id="fovSlider" min="30" max="100" value="62"><span id="fovVal">62&deg;</span></label>
+    <label>Yaw trim <input type="range" id="yawTrim" min="-180" max="180" value="0"><span id="yawVal">0&deg;</span></label>
+    <div class="file-btn" id="loadPanoBtn">Load equirectangular image&hellip;</div>
+    <input type="file" id="panoInput" accept="image/*">
+  </div>
+  <div id="row-meta">
+    <span id="orientReadout">&alpha; 0&deg; &beta; 0&deg; &gamma; 0&deg;</span>
+    <span id="sampleCount">0 samples</span>
+  </div>
+  <div id="row-main">
+    <div class="pill" id="calBtn">Calibrate&nbsp;forward</div>
+    <div class="pill" id="recBtn">Record</div>
+    <div class="pill" id="settingsBtn">Settings</div>
+    <div class="pill" id="exportBtn">Export</div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  // ---------- toast ----------
+  const toastEl = document.getElementById('toast');
+  let toastTimer = null;
+  function toast(msg, ms) {
+    toastEl.textContent = msg;
+    toastEl.classList.add('show');
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(() => toastEl.classList.remove('show'), ms || 1800);
+  }
+
+  // ---------- three.js scene ----------
+  const stage = document.getElementById('stage');
+  const renderer = new THREE.WebGLRenderer({ antialias: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  stage.appendChild(renderer.domElement);
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 10);
+  camera.position.set(0, 0, 0);
+
+  const sphereGeo = new THREE.SphereGeometry(5, 64, 40);
+  sphereGeo.scale(-1, 1, 1); // view from inside
+  const sphereMat = new THREE.MeshBasicMaterial({ color: 0x222222 });
+  const sphereMesh = new THREE.Mesh(sphereGeo, sphereMat);
+  scene.add(sphereMesh);
+
+  function animate() {
+    requestAnimationFrame(animate);
+    renderer.render(scene, camera);
+  }
+  animate();
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth / window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+  });
+
+  // ---------- placeholder equirectangular panorama (procedural) ----------
+  function buildPlaceholderPano() {
+    const w = 2048, h = 1024;
+    const c = document.createElement('canvas');
+    c.width = w; c.height = h;
+    const ctx = c.getContext('2d');
+
+    const grad = ctx.createLinearGradient(0, 0, 0, h);
+    grad.addColorStop(0, '#0d1013');
+    grad.addColorStop(0.45, '#181d22');
+    grad.addColorStop(0.55, '#14100f');
+    grad.addColorStop(1, '#050403');
+    ctx.fillStyle = grad;
+    ctx.fillRect(0, 0, w, h);
+
+    // longitude gridlines every 30deg, labeled, so you can eyeball calibration/drift
+    ctx.strokeStyle = 'rgba(255,255,255,0.08)';
+    ctx.fillStyle = 'rgba(255,255,255,0.35)';
+    ctx.font = '20px monospace';
+    ctx.textAlign = 'center';
+    for (let deg = 0; deg < 360; deg += 30) {
+      const x = (deg / 360) * w;
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, h); ctx.stroke();
+      ctx.fillText(deg + '\u00B0', x, 30);
+    }
+    // horizon line
+    ctx.strokeStyle = 'rgba(255,255,255,0.18)';
+    ctx.beginPath(); ctx.moveTo(0, h / 2); ctx.lineTo(w, h / 2); ctx.stroke();
+
+    // fog haze bands (parallax-free, just for reference depth cue)
+    for (let i = 0; i < 6; i++) {
+      ctx.fillStyle = `rgba(120,130,140,${0.02 + i * 0.01})`;
+      ctx.fillRect(0, h * 0.4 + i * 14, w, 6);
+    }
+
+    // "monster" placeholder — tall dark silhouette around 200deg longitude
+    const monsterDeg = 200;
+    const mx = (monsterDeg / 360) * w;
+    ctx.save();
+    ctx.translate(mx, h * 0.52);
+    ctx.fillStyle = '#050403';
+    ctx.beginPath();
+    ctx.moveTo(-60, 230);
+    ctx.quadraticCurveTo(-90, 40, -30, -160);
+    ctx.quadraticCurveTo(0, -230, 30, -160);
+    ctx.quadraticCurveTo(90, 40, 60, 230);
+    ctx.closePath();
+    ctx.fill();
+    // faint eye glow
+    ctx.fillStyle = 'rgba(201,79,61,0.65)';
+    ctx.beginPath(); ctx.ellipse(-14, -140, 5, 3, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.ellipse(14, -140, 5, 3, 0, 0, Math.PI * 2); ctx.fill();
+    ctx.restore();
+    ctx.textAlign = 'left';
+    ctx.fillStyle = 'rgba(255,255,255,0.3)';
+    ctx.font = '16px monospace';
+    ctx.fillText('placeholder monster @ ' + monsterDeg + '\u00B0 — swap in your CG render', mx - 150, h * 0.52 + 260);
+
+    // "0deg is forward" marker, since forward = wherever you calibrate to
+    ctx.fillStyle = 'rgba(255,255,255,0.45)';
+    ctx.font = '18px monospace';
+    ctx.fillText('CALIBRATE HERE = 0\u00B0', 40, h - 40);
+
+    return new THREE.CanvasTexture(c);
+  }
+
+  function applyTexture(tex) {
+    tex.wrapS = THREE.RepeatWrapping;
+    tex.colorSpace = THREE.SRGBColorSpace || THREE.sRGBEncoding;
+    sphereMat.map = tex;
+    sphereMat.color.set(0xffffff);
+    sphereMat.needsUpdate = true;
+  }
+  applyTexture(buildPlaceholderPano());
+
+  document.getElementById('loadPanoBtn').addEventListener('click', () => {
+    document.getElementById('panoInput').click();
+  });
+  document.getElementById('panoInput').addEventListener('change', (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+    const url = URL.createObjectURL(file);
+    new THREE.TextureLoader().load(url, (tex) => {
+      applyTexture(tex);
+      toast('Panorama loaded — recalibrate to re-zero forward');
+    });
+  });
+
+  // ---------- FOV / yaw trim ----------
+  const fovSlider = document.getElementById('fovSlider');
+  const yawTrim = document.getElementById('yawTrim');
+  let yawTrimRad = 0;
+  fovSlider.addEventListener('input', () => {
+    camera.fov = parseFloat(fovSlider.value);
+    camera.updateProjectionMatrix();
+    document.getElementById('fovVal').textContent = fovSlider.value + '\u00B0';
+  });
+  yawTrim.addEventListener('input', () => {
+    yawTrimRad = THREE.MathUtils.degToRad(parseFloat(yawTrim.value));
+    document.getElementById('yawVal').textContent = yawTrim.value + '\u00B0';
+  });
+
+  document.getElementById('settingsBtn').addEventListener('click', () => {
+    document.getElementById('row-settings').classList.toggle('open');
+  });
+
+  // ---------- device orientation -> quaternion ----------
+  // Standard conversion (matches the approach used in three.js's own
+  // DeviceOrientationControls), producing a quaternion for the raw device
+  // reading. We track *relative* rotation from a calibration reference,
+  // rather than trusting absolute compass heading — much more stable,
+  // and it's all we need since the rig doesn't move location.
+  const DEG2RAD = Math.PI / 180;
+  const zee = new THREE.Vector3(0, 0, 1);
+  const q0 = new THREE.Quaternion();
+  const q1 = new THREE.Quaternion(-Math.sqrt(0.5), 0, 0, Math.sqrt(0.5)); // -90deg around X
+  const euler = new THREE.Euler();
+  const deviceQuat = new THREE.Quaternion();
+  const refInverse = new THREE.Quaternion();
+  const relativeQuat = new THREE.Quaternion();
+  let calibrated = false;
+
+  function screenOrientAngle() {
+    if (screen.orientation && typeof screen.orientation.angle === 'number') return screen.orientation.angle;
+    if (typeof window.orientation === 'number') return window.orientation;
+    return 0;
+  }
+
+  function computeDeviceQuaternion(alpha, beta, gamma) {
+    euler.set(beta * DEG2RAD, alpha * DEG2RAD, -gamma * DEG2RAD, 'YXZ');
+    deviceQuat.setFromEuler(euler);
+    deviceQuat.multiply(q1);
+    deviceQuat.multiply(q0.setFromAxisAngle(zee, -screenOrientAngle() * DEG2RAD));
+    return deviceQuat;
+  }
+
+  let lastReading = { alpha: 0, beta: 0, gamma: 0 };
+  let recording = false;
+  let samples = [];
+  let recordStart = 0;
+
+  function onOrientation(e) {
+    if (e.alpha === null) return;
+    lastReading = { alpha: e.alpha, beta: e.beta, gamma: e.gamma };
+    document.getElementById('orientReadout').textContent =
+      `\u03B1 ${e.alpha.toFixed(1)}\u00B0 \u03B2 ${e.beta.toFixed(1)}\u00B0 \u03B3 ${e.gamma.toFixed(1)}\u00B0`;
+
+    const dq = computeDeviceQuaternion(e.alpha, e.beta, e.gamma);
+
+    if (calibrated) {
+      relativeQuat.copy(dq).premultiply(refInverse);
+      // apply yaw trim around world Y for manual alignment
+      const trim = new THREE.Quaternion().setFromAxisAngle(new THREE.Vector3(0, 1, 0), yawTrimRad);
+      camera.quaternion.copy(trim).multiply(relativeQuat);
+    }
+
+    if (recording) {
+      samples.push({
+        t: +(performance.now() - recordStart).toFixed(1),
+        alpha: e.alpha, beta: e.beta, gamma: e.gamma,
+        qx: relativeQuat.x, qy: relativeQuat.y, qz: relativeQuat.z, qw: relativeQuat.w
+      });
+      document.getElementById('sampleCount').textContent = samples.length + ' samples';
+    }
+  }
+
+  function calibrate() {
+    const dq = computeDeviceQuaternion(lastReading.alpha, lastReading.beta, lastReading.gamma);
+    refInverse.copy(dq).invert();
+    calibrated = true;
+    toast('Forward zeroed — current phone aim is now dead ahead');
+  }
+
+  document.getElementById('calBtn').addEventListener('click', calibrate);
+
+  document.getElementById('recBtn').addEventListener('click', () => {
+    recording = !recording;
+    const pill = document.getElementById('recBtn');
+    if (recording) {
+      samples = [];
+      recordStart = performance.now();
+      pill.classList.add('rec');
+      pill.innerHTML = '<span class="dot"></span>Recording';
+    } else {
+      pill.classList.remove('rec');
+      pill.textContent = 'Record';
+      toast(samples.length + ' samples captured');
+    }
+  });
+
+  document.getElementById('exportBtn').addEventListener('click', () => {
+    if (!samples.length) { toast('Nothing recorded yet'); return; }
+    const payload = {
+      note: 'Timestamps in ms from record start. alpha/beta/gamma are raw device orientation degrees. qx/qy/qz/qw is the calibrated relative camera quaternion (Three.js, Y-up) already used to drive this viewer — re-apply the same quaternion to a camera in Blender/Unreal to reproduce this exact move.',
+      fov: camera.fov,
+      samples
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'camera-move-' + Date.now() + '.json';
+    a.click();
+  });
+
+  // ---------- start / permission gate ----------
+  document.getElementById('startBtn').addEventListener('click', async () => {
+    const needsPermission = typeof DeviceOrientationEvent !== 'undefined'
+      && typeof DeviceOrientationEvent.requestPermission === 'function';
+
+    if (needsPermission) {
+      try {
+        const result = await DeviceOrientationEvent.requestPermission();
+        if (result !== 'granted') {
+          toast('Motion access denied — enable it in Settings > Safari > Motion & Orientation');
+          return;
+        }
+      } catch (err) {
+        toast('Could not request motion permission: ' + err.message);
+        return;
+      }
+    }
+
+    window.addEventListener('deviceorientation', onOrientation, true);
+    document.getElementById('gate').style.display = 'none';
+    setTimeout(calibrate, 300); // auto-zero on start so it doesn't snap
+    toast('Tap "Calibrate forward" any time to re-zero the aim');
+  });
+
+  // fallback message if sensors never fire
+  setTimeout(() => {
+    if (lastReading.alpha === 0 && document.getElementById('gate').style.display === 'none') {
+      toast('No orientation data yet — check this page is loaded over HTTPS and motion is allowed');
+    }
+  }, 3000);
+})();
+</script>
+</body>
+</html>
